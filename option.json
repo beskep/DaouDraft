@@ -13,6 +13,7 @@
   },
   "친환경": {
     "draftUser": "이용하",
-    "signName": ["이용하", null, null, "김영진"]
+    "signName": ["이용하", null, null, "김영진"],
+    "wrongOption": null
   }
 }

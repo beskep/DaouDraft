@@ -1,20 +1,22 @@
+from collections import OrderedDict
+from pathlib import Path
+from subprocess import run
 import datetime
 import json
 import os
+import logging
 import re
-from collections import OrderedDict
-from subprocess import run
-from warnings import warn
 
 import bs4
+from rich.console import Console
 
-_FILE_DIR = os.path.dirname(__file__)
-_WKHTMLTOX_PATH = os.path.abspath(
-    os.path.join(_FILE_DIR, '../wkhtmltox/bin/wkhtmltopdf.exe'))
-_STAMP_PATH = os.path.abspath(os.path.join(_FILE_DIR, '../stamp_approved.png'))
+_ROOT_DIR = Path(__file__).parents[2]
+_WKHTMLTOX_PATH = _ROOT_DIR / 'src/wkhtmltox/bin/wkhtmltopdf.exe'
+_STAMP_PATH = _ROOT_DIR / 'src/stamp_approved.png'
 
-if not os.path.exists(_WKHTMLTOX_PATH):
-  raise FileNotFoundError(_WKHTMLTOX_PATH)
+for p in [_WKHTMLTOX_PATH, _STAMP_PATH]:
+  if not p.exists():
+    raise FileNotFoundError(p)
 
 
 class DaouDraft:
@@ -29,6 +31,9 @@ class DaouDraft:
     self._path = path
     self._soup = self.read_soup(self._path)
     self._member, self._rank, self._name, self._date = self._sign_members()
+
+    self._logger = logging.getLogger('{}.{}'.format(
+        __name__, self.__class__.__qualname__))
 
   @property
   def soup(self):
@@ -101,9 +106,9 @@ class DaouDraft:
 
     sign_rank, sign_name, sign_date = self._sign_members_helper(sign_member)
 
-    # sign_rank_string = [str(x.string).strip() for x in sign_rank]
-    # if sign_rank_string != list(self.__default_rank):
-    #   warn('직급 순서가 예상과 달라 오류가 발생할 수 있음: {}'.format(sign_rank_string))
+    sign_rank_string = [str(x.string).strip() for x in sign_rank]
+    if sign_rank_string != list(self.__default_rank):
+      self._logger.debug('직급 순서가 예상과 다름: {}'.format(sign_rank_string))
 
     assert len(sign_rank) == self.__sign_member_count
     assert len(sign_name) == self.__sign_member_count
@@ -113,6 +118,7 @@ class DaouDraft:
 
   def fix_sign(self):
     if any(x is None for x in self._name):
+      self._logger.debug('fix_sign (names: {})'.format(self._name))
       self._fill_sign_member()
       self._fix_sign_date()
 
@@ -153,27 +159,37 @@ class DaouDraft:
 class Runner:
 
   def __init__(self) -> None:
-    doc_dir = os.path.abspath(os.path.join(_FILE_DIR, '../../documents'))
+    self._logger = logging.getLogger('{}.{}'.format(
+        __name__, self.__class__.__qualname__))
+
+    doc_dir = _ROOT_DIR / 'documents'
+    if not doc_dir.exists():
+      self._logger.error('documents 폴더가 없습니다')
+      raise FileNotFoundError(doc_dir)
+
     lstdir = os.listdir(doc_dir)
-
-    drafts = [os.path.join(doc_dir, x) for x in lstdir if x.endswith('html')]
+    drafts = [doc_dir / x for x in lstdir if x.endswith('html')]
     if not drafts:
-      warn('변환할 문서가 없습니다.')
-
+      self._logger.warn('변환할 문서가 없습니다')
+    else:
+      self._logger.info('변환할 문서 목록')
+      for x in drafts:
+        self._logger.info(str(x))
     self._drafts = drafts
 
-    option_path = os.path.abspath(os.path.join(_FILE_DIR, '../../option.json'))
-    if not os.path.exists(option_path):
-      raise FileNotFoundError('Option 파일이 없습니다: {}'.format(option_path))
-
-    with open(option_path, 'r', encoding='utf-8') as f:
-      self._option: OrderedDict = json.load(f, object_pairs_hook=OrderedDict)
+    option_path = _ROOT_DIR / 'option.json'
+    try:
+      with open(option_path, 'r', encoding='utf-8') as f:
+        self._option: OrderedDict = json.load(f, object_pairs_hook=OrderedDict)
+    except FileNotFoundError as e:
+      self._logger.error('Option 파일이 없습니다: {}'.format(option_path))
+      raise e
 
   def run(self, drafts=None):
     if drafts is None:
       drafts = self._drafts
 
-    res_dir = os.path.normpath(os.path.join(_FILE_DIR, '../../pdf'))
+    res_dir = _ROOT_DIR / 'pdf'
     if not os.path.exists(res_dir):
       os.makedirs(res_dir)
 
@@ -183,14 +199,13 @@ class Runner:
       draft.change_image_source()
 
       fname = os.path.split(path)[1]
-      print('\n\n' + fname)
 
       for pattern, options in self._option.items():
         if not pattern.startswith('.*'):
           pattern = '.*' + pattern
 
         if pattern == '.*' or re.match(pattern, fname):
-          print('{}: 옵션 "{}"'.format(fname, pattern))
+          self._logger.info('문서 "{}"에 옵션 "{}" 적용'.format(fname, pattern))
 
           for key, value in options.items():
             if key.startswith('doc') or key.startswith('draft'):
@@ -202,7 +217,7 @@ class Runner:
             elif key == 'signDate':
               draft.change_sign_date(value)
             else:
-              warn('잘못된 옵션: {}: {}'.format(key, value))
+              self._logger.warn('잘못된 옵션: "{}: {}"'.format(key, value))
 
       res_path = os.path.normpath(os.path.join(res_dir, fname))
       draft.save(res_path)
@@ -217,4 +232,4 @@ def to_pdf(html_path):
   args = [
       _WKHTMLTOX_PATH, '-L', '20', '-R', '20', '-T', '20', html_path, pdf_path
   ]
-  run(args)
+  run(args, capture_output=True)

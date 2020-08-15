@@ -1,9 +1,12 @@
 import pytest
 import bs4
 import os
+import sys
 from datetime import datetime
 
-from daou_draft import daou_draft
+sys.path.append(os.path.join(__file__, '../../src'))
+
+from draft import daou_draft
 
 
 @pytest.fixture
@@ -72,4 +75,4 @@ def test_runner():
 
 
 if __name__ == "__main__":
-  pytest.main(['--verbose', '-k', 'test_fix_sign_date'])
+  pytest.main(['--verbose', '-k', ''])
