@@ -8,13 +8,12 @@ import logging
 import re
 
 import bs4
-from rich.console import Console
 
-_ROOT_DIR = Path(__file__).parents[2]
-_WKHTMLTOX_PATH = _ROOT_DIR / 'src/wkhtmltox/bin/wkhtmltopdf.exe'
-_STAMP_PATH = _ROOT_DIR / 'src/stamp_approved.png'
+ROOT_DIR = Path(__file__).parents[2]
+WKHTMLTOX_PATH = ROOT_DIR / 'src/wkhtmltox/bin/wkhtmltopdf.exe'
+STAMP_PATH = ROOT_DIR / 'src/stamp_approved.png'
 
-for p in [_WKHTMLTOX_PATH, _STAMP_PATH]:
+for p in [WKHTMLTOX_PATH, STAMP_PATH]:
   if not p.exists():
     raise FileNotFoundError(p)
 
@@ -30,10 +29,11 @@ class DaouDraft:
   def __init__(self, path) -> None:
     self._path = path
     self._soup = self.read_soup(self._path)
-    self._member, self._rank, self._name, self._date = self._sign_members()
 
     self._logger = logging.getLogger('{}.{}'.format(
         __name__, self.__class__.__qualname__))
+
+    self._member, self._rank, self._name, self._date = self._sign_members()
 
   @property
   def soup(self):
@@ -150,10 +150,23 @@ class DaouDraft:
         tag.string.replace_with(date)
 
   def change_image_source(self):
-    if os.path.exists(_STAMP_PATH):
+    if os.path.exists(STAMP_PATH):
       imgs = self.soup.find_all(name='img')
       for img in imgs:
-        img.attrs['src'] = 'file:///{}'.format(_STAMP_PATH)
+        img.attrs['src'] = 'file:///{}'.format(STAMP_PATH)
+
+  def change_by_dict(self, options: dict):
+    for key, value in options.items():
+      if key.startswith('doc') or key.startswith('draft'):
+        self.change_label(key, value)
+      elif key == 'signName':
+        self.change_sign_name(value)
+      elif key == 'signRank':
+        self.change_sign_rank(value)
+      elif key == 'signDate':
+        self.change_sign_date(value)
+      else:
+        self._logger.warn('잘못된 옵션: "{}: {}"'.format(key, value))
 
 
 class Runner:
@@ -162,7 +175,7 @@ class Runner:
     self._logger = logging.getLogger('{}.{}'.format(
         __name__, self.__class__.__qualname__))
 
-    doc_dir = _ROOT_DIR / 'documents'
+    doc_dir = ROOT_DIR / 'documents'
     if not doc_dir.exists():
       self._logger.error('documents 폴더가 없습니다')
       raise FileNotFoundError(doc_dir)
@@ -177,7 +190,7 @@ class Runner:
         self._logger.info(str(x))
     self._drafts = drafts
 
-    option_path = _ROOT_DIR / 'option.json'
+    option_path = ROOT_DIR / 'option.json'
     try:
       with open(option_path, 'r', encoding='utf-8') as f:
         self._option: OrderedDict = json.load(f, object_pairs_hook=OrderedDict)
@@ -189,14 +202,14 @@ class Runner:
     if drafts is None:
       drafts = self._drafts
 
-    res_dir = _ROOT_DIR / 'pdf'
+    res_dir = ROOT_DIR / 'pdf'
     if not os.path.exists(res_dir):
       os.makedirs(res_dir)
 
     for path in drafts:
       draft = DaouDraft(path)
       draft.fix_sign()
-      draft.change_image_source()
+      # draft.change_image_source()
 
       fname = os.path.split(path)[1]
 
@@ -206,18 +219,7 @@ class Runner:
 
         if pattern == '.*' or re.match(pattern, fname):
           self._logger.info('문서 "{}"에 옵션 "{}" 적용'.format(fname, pattern))
-
-          for key, value in options.items():
-            if key.startswith('doc') or key.startswith('draft'):
-              draft.change_label(key, value)
-            elif key == 'signName':
-              draft.change_sign_name(value)
-            elif key == 'signRank':
-              draft.change_sign_rank(value)
-            elif key == 'signDate':
-              draft.change_sign_date(value)
-            else:
-              self._logger.warn('잘못된 옵션: "{}: {}"'.format(key, value))
+          draft.change_by_dict(options=options)
 
       res_path = os.path.normpath(os.path.join(res_dir, fname))
       draft.save(res_path)
@@ -230,6 +232,6 @@ def to_pdf(html_path):
   pdf_path = os.path.join(dir_, fname + '.pdf')
 
   args = [
-      _WKHTMLTOX_PATH, '-L', '20', '-R', '20', '-T', '20', html_path, pdf_path
+      WKHTMLTOX_PATH, '-L', '20', '-R', '20', '-T', '20', html_path, pdf_path
   ]
   run(args, capture_output=True)

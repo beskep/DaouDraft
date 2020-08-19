@@ -1,0 +1,835 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="content-type" />
+  <meta content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" name="viewport" />
+  <style type="text/css">
+    body,
+    img,
+    p {
+      margin: 0;
+      padding: 0
+    }
+
+    span.editor_span {
+      display: block;
+      width: auto !important;
+      margin: 5px
+    }
+
+    span.editor_span table {
+      word-break: normal
+    }
+
+    span.editor_span,
+    span.editor_span table,
+    span.editor_span p,
+    span.editor_span span {
+      font-size: 12px;
+      font-family: dotum;
+      line-height: 1.5
+    }
+
+    .editor_span td {
+      padding: 0 !important
+    }
+
+    .editor_span ol,
+    .editor_span ul {
+      list-style-position: inside;
+      padding-left: 40px
+    }
+
+    img {
+      border: 0
+    }
+
+    /* sign_type1 */
+    div.sign_type1 {
+      display: inline-block;
+      margin-right: -1px;
+      font-size: 12px
+    }
+
+    div.sign_type1.last table.tb_sign_type1 {
+      border-left: 0
+    }
+
+    div.sign_type1 table.tb_sign_type1,
+    table.sign_member {
+      border-spacing: 0;
+      border-collapse: collapse;
+      width: 60px
+    }
+
+    div.sign_type1 table.tb_sign_type1 {
+      border: 1px solid #666
+    }
+
+    div.sign_type1 table.tb_sign_type1 tbody tr th {
+      width: 20px;
+      background: #eee;
+      padding: 4px;
+      text-align: center;
+      word-break: break-word;
+      white-space: normal
+    }
+
+    div.sign_type1 table.tb_sign_type1 tbody tr td {
+      border-left: 1px solid #666;
+      padding: 0 !important
+    }
+
+    div.sign_type1 table.tb_sign_type1 tbody tr td table.sign_member tbody tr td {
+      height: 26px;
+      border-left: 0;
+      border-bottom: 1px solid #666;
+      min-height: 26px;
+      vertical-align: middle
+    }
+
+    div.sign_type1 table.tb_sign_type1 tbody tr td table.sign_member tbody tr td.last {
+      border-bottom: 0
+    }
+
+    div.sign_type1 table.tb_sign_type1 tbody tr td table.sign_member tbody tr td span {
+      display: block;
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 70px;
+      padding: 4px;
+      font-size: 12px
+    }
+
+    div.sign_type1 table.tb_sign_type1 tbody tr td table.sign_member tbody tr td span.sign_name {
+      height: 36px
+    }
+
+    div.sign_type1 table.tb_sign_type1 tbody tr td table.sign_member tbody tr td span.arbitrary {
+      background: url(../images/arbitrary.gif) no-repeat
+    }
+
+    div.sign_type1 table.tb_sign_type1 tbody tr td table.sign_member tbody tr td span img {
+      width: auto;
+      height: 100%
+    }
+
+    div.sign_type1 table.tb_sign_type1 tbody tr td table.sign_member tbody tr td span.doc_return {
+      padding: 0;
+    }
+
+    /* sign_type_new */
+    div.sign_type_new {
+      display: inline-block;
+      margin-right: -1px;
+      font-size: 12px
+    }
+
+    div.sign_type_new.last table.tb_sign_type1 {
+      border-left: 0
+    }
+
+    div.sign_type_new table.tb_sign_type1 {
+      border: 1px solid #666
+    }
+
+    div.sign_type_new table.tb_sign_type1 tbody tr td table.sign_member tbody tr td span.sign_name {
+      height: auto
+    }
+
+    div.sign_type_new table.tb_sign_type1 tbody tr th {
+      width: 15px;
+      background: #eee;
+      padding: 6px;
+      text-align: center;
+      word-break: break-word;
+      white-space: normal
+    }
+
+    div.sign_type_new table.tb_sign_type1 tbody tr td {
+      border-left: 1px solid #666;
+      padding: 0 !important
+    }
+
+    div.sign_type_new table.tb_sign_type1 tbody tr td table.sign_member tbody tr td {
+      height: 26px;
+      border-left: 0;
+      border-bottom: 1px solid #666;
+      min-height: 26px
+    }
+
+    div.sign_type_new table.tb_sign_type1 tbody tr td table.sign_member tbody tr td.last {
+      border-bottom: 0
+    }
+
+    div.sign_type_new table.tb_sign_type1 tbody tr td table.sign_member tbody tr td span {
+      display: block;
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 70px;
+      font-size: 12px;
+      padding: 2px 4px
+    }
+
+    div.sign_type_new table.tb_sign_type1 tbody tr td table.sign_member tbody tr td.wrap_name,
+    div.sign_type_new table.tb_sign_type1 tbody tr td table.sign_member tbody tr td.wrap_position,
+    div.sign_type_new table.tb_sign_type1 tbody tr td table.sign_member tbody tr td.wrap_rank,
+    div.sign_type_new table.tb_sign_type1 tbody tr td table.sign_member tbody tr td.wrap_type {
+      height: 48px;
+      text-align: center
+    }
+
+    div.sign_type_new table.tb_sign_type1 tbody tr td table.sign_member tbody tr td.wrap_sign {
+      height: 74px;
+      text-align: center
+    }
+
+    div.sign_type_new table.tb_sign_type1 tbody tr td table.sign_member tbody tr td span.sign_stamp {
+      height: 40px;
+      padding-bottom: 0
+    }
+
+    div.sign_type_new table.tb_sign_type1 tbody tr td table.sign_member tbody tr td span.sign_stamp img {
+      width: auto;
+      height: 100%
+    }
+
+    div.sign_type_new table.tb_sign_type1 tbody tr td table.sign_member tbody tr td span.arbitrary {
+      background: url(../images/arbitrary.gif) no-repeat;
+      height: 36px;
+      padding: 0
+    }
+
+    div.sign_type_new table.tb_sign_type1 tbody tr td table.sign_member tbody tr td.wrap_arbitrary {
+      padding: 0
+    }
+
+    /* sign_type2 */
+    span.sign_type2 span.sign_member {
+      border: 1px solid #000;
+      padding: 4px;
+      display: block;
+      margin: 0 0 -1px
+    }
+
+    span.sign_type2 span.sign_member span.name {
+      color: #333
+    }
+
+    span.sign_type2 span.sign_member span.date {
+      margin: 0 !important
+    }
+
+    span.sign_type2 span.sign_member span.rank {
+      margin: 0 0 0 4px
+    }
+
+    /* sign_type1_iline */
+    .sign_type1_inline {
+      display: inline-table !important;
+      border-collapse: separate;
+      border-spacing: 0;
+      white-space: normal;
+      font-size: 12px;
+      margin-right: -1px
+    }
+
+    .sign_type1_inline:after {
+      display: block;
+      clear: left;
+      overflow: hidden;
+      height: 0;
+      content: ''
+    }
+
+    .sign_type1_inline .sign_tit_wrap {
+      vertical-align: middle;
+      border: 1px solid #000;
+      width: 24px;
+      background: #eee;
+      display: table-cell
+    }
+
+    .sign_type1_inline .sign_tit_wrap .sign_tit {
+      display: table-cell;
+      vertical-align: middle;
+      width: 20px;
+      padding: 0 2px;
+      text-align: center;
+      word-break: break-all;
+      white-space: normal
+    }
+
+    .sign_type1_inline .sign_member_wrap {
+      vertical-align: top;
+      background: #fff;
+      display: table-cell;
+      float: left;
+      border: 1px solid #000;
+      border-left: 0
+    }
+
+    .sign_type1_inline .sign_member_wrap .sign_member {
+      width: 79px;
+      vertical-align: top;
+      margin: 0;
+      display: table;
+      table-layout: fixed
+    }
+
+    .sign_type1_inline .sign_member_wrap .sign_member .sign_rank_wrap,
+    .sign_type1_inline .sign_member_wrap .sign_member .sign_date_wrap {
+      display: table-row
+    }
+
+    .sign_type1_inline .sign_member_wrap .sign_member .sign_rank,
+    .sign_type1_inline .sign_member_wrap .sign_member .sign_wrap,
+    .sign_type1_inline .sign_member_wrap .sign_member .sign_date {
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+      width: 79px
+    }
+
+    .sign_type1_inline .sign_member_wrap .sign_member .sign_rank {
+      height: 26px
+    }
+
+    .sign_type1_inline .sign_member_wrap .sign_member .sign_wrap {
+      height: 75px;
+      border-top: 1px solid #000
+    }
+
+    .sign_type1_inline strong {
+      font-weight: bold;
+    }
+
+    .sign_type1_inline .sign_member_wrap .sign_member .sign_wrap .arbitrary {
+      background: url(../images/arbitrary.gif) no-repeat;
+      height: 40px;
+      width: 79px;
+      padding: 0;
+    }
+
+    .sign_type1_inline .sign_member_wrap .sign_member .sign_date {
+      height: 26px;
+      border-top: 1px solid #000
+    }
+
+    .sign_type1_inline .sign_member_wrap .sign_member .sign_stamp {
+      width: 79px;
+      height: 40px
+    }
+
+    .sign_type1_inline .sign_member_wrap .sign_member .sign_stamp img {
+      width: auto;
+      height: 100%;
+    }
+
+    .sign_type1_inline .sign_member_wrap .sign_member .sign_wrap>span {
+      padding: 2px 0;
+      display: block
+    }
+
+    .sign_type1_inline .sign_rank,
+    .sign_type1_inline .sign_name,
+    .sign_type1_inline .sign_position,
+    .sign_type1_inline .sign_type,
+    .sign_type1_inline .sign_date {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 80px;
+    }
+
+    .sign_arbitrary {
+      background: url(../images/arbitrary.gif) no-repeat;
+      height: 40px;
+      width: 79px;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <span style='line-height: normal; font-family: "맑은 고딕"; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;'>
+    <span style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">
+      <span style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">
+        <span style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">
+          <span style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">
+            <span
+              style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">
+              <span
+                style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">
+                <span
+                  style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">
+                  <span
+                    style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">
+                    <span
+                      style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">
+                    </span>
+                  </span>
+                </span>
+              </span>
+            </span>
+          </span>
+        </span>
+      </span>
+    </span>
+    <div style="line-height: normal; font-family: "맑은 고딕", "malgun gothic", sans-serif; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;">
+      <span style="line-height: normal; font-family: "맑은 고딕", "malgun gothic", sans-serif; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;">
+      </span>
+    </div>
+    <div style="line-height: normal; font-family: "맑은 고딕", "malgun gothic", sans-serif; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">
+      <span
+        style='line-height: normal; font-family: "malgun gothic", dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;'>
+        <!-- Header -->
+      </span>
+      <span
+        style='line-height: normal; font-family: "malgun gothic", dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;'>
+      </span>
+      <span
+        style='line-height: normal; font-family: "malgun gothic", dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;'>
+      </span>
+      <span
+        style='line-height: normal; font-family: "malgun gothic", dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;'>
+      </span>
+      <table
+        style="border: 0px solid rgb(0, 0, 0); border-image: none; width: 800px; font-family: malgun gothic,dotum,arial,tahoma; margin-top: 1px; border-collapse: collapse;">
+        <colgroup>
+        </colgroup>
+        <colgroup>
+          <col width="310" />
+        </colgroup>
+        <colgroup>
+          <col width="490" />
+        </colgroup>
+        <tbody>
+          <tr>
+            <td class="" colspan="2"
+              style="background: white; padding: 0px !important; border: 0px currentColor; border-image: none; height: 90px; text-align: center; color: black; font-size: 36px; font-weight: bold; vertical-align: middle;">
+              <span
+                style='line-height: normal; font-family: "malgun gothic", dotum, arial, tahoma; font-size: 24pt; margin-top: 0px; margin-bottom: 0px;'>
+                [ 기안서 ]
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td
+              style="background: white; padding: 0px !important; border: currentColor; border-image: none; width: 238px; text-align: left; color: black; font-weight: normal; vertical-align: top;">
+              <span
+                style='line-height: normal; font-family: "malgun gothic", dotum, arial, tahoma; font-size: 12px; margin-top: 0px; margin-bottom: 0px;'>
+                <!-- User -->
+              </span>
+              <span
+                style='line-height: normal; font-family: "malgun gothic", dotum, arial, tahoma; font-size: 12px; margin-top: 0px; margin-bottom: 0px;'>
+              </span>
+              <span
+                style='line-height: normal; font-family: "malgun gothic", dotum, arial, tahoma; font-size: 12px; margin-top: 0px; margin-bottom: 0px;'>
+              </span>
+              <span
+                style='line-height: normal; font-family: "malgun gothic", dotum, arial, tahoma; font-size: 12px; margin-top: 0px; margin-bottom: 0px;'>
+              </span>
+              <table align=""
+                style='border: 1px rgb(0, 0, 0); width: 302px; font-family: "malgun gothic", dotum, arial, tahoma; font-size: 10pt; margin-top: 1px; border-collapse: collapse; height: 119px;'>
+                <colgroup>
+                </colgroup>
+                <colgroup>
+                  <col width="90" />
+                </colgroup>
+                <colgroup>
+                  <col width="220" />
+                </colgroup>
+                <tbody>
+                  <tr>
+                    <td scope=""
+                      style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid rgb(0, 0, 0); width: 60px; height: 10px; text-align: center; color: rgb(0, 0, 0); font-weight: bold; vertical-align: middle;">
+                      <span
+                        style='font-size: 10pt; font-family: "malgun gothic", dotum, arial, tahoma; line-height: normal; margin-top: 0px; margin-bottom: 0px;'>
+                        문서번호
+                      </span>
+                    </td>
+                    <td scope=""
+                      style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid rgb(0, 0, 0); width: 180px; height: 10px; text-align: left; color: rgb(0, 0, 0); font-weight: normal; vertical-align: middle;">
+                      <span data-defaultstr="" data-dsl="{{label:docNo}}" data-editable="true" data-id="docNo"
+                        data-maxlength="" data-name="docNo" data-require="false" data-select=""
+                        data-select-option="true" data-type="system" data-value="[[docNo]]" data-width=""
+                        value="[[docNo]]">
+                        [[docNo]]
+                      </span>
+                      <span
+                        style='line-height: normal; font-family: "malgun gothic", dotum, arial, tahoma; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;'>
+                      </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td scope=""
+                      style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid rgb(0, 0, 0); width: 60px; height: 10px; text-align: center; color: rgb(0, 0, 0); font-weight: bold; vertical-align: middle;">
+                      <span
+                        style='font-size: 10pt; font-family: "malgun gothic", dotum, arial, tahoma; line-height: normal; margin-top: 0px; margin-bottom: 0px;'>
+                        작 성 일
+                      </span>
+                    </td>
+                    <td scope=""
+                      style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid rgb(0, 0, 0); width: 180px; height: 10px; text-align: left; color: rgb(0, 0, 0); font-weight: normal; vertical-align: middle;">
+                      <span data-defaultstr="" data-dsl="{{label:draftDate}}" data-editable="true" data-id="draftDate"
+                        data-maxlength="" data-name="draftDate" data-require="false" data-select="[[draftDate]]"
+                        data-select-option="true" data-type="system" data-value="[[draftDate]]" data-width=""
+                        value="[[draftDate]]">
+                        [[draftDate]]
+                      </span>
+                      <span
+                        style='line-height: normal; font-family: "malgun gothic", dotum, arial, tahoma; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;'>
+                      </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td scope=""
+                      style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid rgb(0, 0, 0); width: 60px; height: 10px; text-align: center; color: rgb(0, 0, 0); font-weight: bold; vertical-align: middle;">
+                      <p
+                        style='line-height: 1.5; font-family: "malgun gothic", dotum, arial, tahoma; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;'>
+                        <span
+                          style='line-height: 20px; font-family: "malgun gothic", dotum, arial, tahoma; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;'>
+                          부 서 명
+                        </span>
+                      </p>
+                    </td>
+                    <td scope=""
+                      style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid rgb(0, 0, 0); width: 180px; height: 10px; text-align: left; color: rgb(0, 0, 0); font-weight: normal; vertical-align: middle;">
+                      <span data-defaultstr="" data-dsl="{{label:draftDept}}" data-editable="true" data-id="draftDept"
+                        data-maxlength="" data-name="draftDept" data-require="false" data-select="친환경연구본부"
+                        data-select-option="true" data-type="system" data-value="친환경연구본부" data-width="" value="친환경연구본부">
+                        친환경연구본부
+                      </span>
+                      <span
+                        style='line-height: normal; font-family: "malgun gothic", dotum, arial, tahoma; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;'>
+                      </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td scope=""
+                      style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid rgb(0, 0, 0); width: 60px; height: 10px; text-align: center; color: rgb(0, 0, 0); font-weight: bold; vertical-align: middle;">
+                      <span
+                        style='font-size: 10pt; font-family: "malgun gothic", dotum, arial, tahoma; line-height: normal; margin-top: 0px; margin-bottom: 0px;'>
+                        작 성 자
+                      </span>
+                    </td>
+                    <td scope=""
+                      style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid rgb(0, 0, 0); width: 180px; height: 10px; text-align: left; color: rgb(0, 0, 0); font-weight: normal; vertical-align: middle;">
+                      <span data-defaultstr="" data-dsl="{{label:draftUser}}" data-editable="true" data-id="draftUser"
+                        data-maxlength="" data-name="draftUser" data-require="false" data-select="박관용"
+                        data-select-option="true" data-type="system" data-value="박관용" data-width="" value="박관용">
+                        박관용
+                      </span>
+                      <span
+                        style='line-height: normal; font-family: "malgun gothic", dotum, arial, tahoma; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;'>
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <span
+                style='line-height: normal; font-family: "malgun gothic", dotum, arial, tahoma; font-size: 12px; margin-top: 0px; margin-bottom: 0px;'>
+              </span>
+            </td>
+            <td
+              style="background: white; padding: 0px !important; border: currentColor; border-image: none; width: 561px; text-align: right; color: black; font-size: 12px; font-weight: normal; vertical-align: top;">
+              <span class="sign_type1_inline" data-group-max-count="1" data-group-name="작성자" data-group-seq="0"
+                data-group-type="type1" data-is-reception=""
+                style='line-height: normal; font-family: "malgun gothic", dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;'>
+                <span class="sign_tit_wrap">
+                  <span class="sign_tit">
+                    <strong>
+                      작성자
+                    </strong>
+                  </span>
+                </span>
+                <span class="sign_member_wrap" id="activity_14215702">
+                  <span class="sign_member">
+                    <span class="sign_rank_wrap">
+                      <span class="sign_rank">
+                        사원
+                      </span>
+                    </span>
+                    <span class="sign_wrap">
+                      <span class="sign_stamp">
+                        <img src="http://mrplan.daouoffice.com:80/resources/images/stamp_approved.png" />
+                      </span>
+                      <span class="sign_name">
+                        <strong>
+                          박관용
+                        </strong>
+                      </span>
+                    </span>
+                    <span class="sign_date_wrap">
+                      <span class="sign_date" id="date_14215702">
+                        2020/06/12
+                      </span>
+                    </span>
+                  </span>
+                </span>
+              </span>
+              <!-- 에디터 &nbsp; 버그. 개행과 공백을 최소화 시키자. -->
+              <span class="sign_type1_inline" data-group-max-count="10" data-group-name="결재" data-group-seq="1"
+                data-group-type="type1" data-is-reception=""
+                style='line-height: normal; font-family: "malgun gothic", dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;'>
+                <span class="sign_tit_wrap">
+                  <span class="sign_tit">
+                    <strong>
+                      결재
+                    </strong>
+                  </span>
+                </span>
+                <span class="sign_member_wrap" id="activity_14216049">
+                  <span class="sign_member">
+                    <span class="sign_rank_wrap">
+                      <span class="sign_rank">
+                        과장
+                      </span>
+                    </span>
+                    <span class="sign_wrap">
+                      <span class="sign_stamp">
+                        <img src="http://mrplan.daouoffice.com:80/resources/images/stamp_approved.png" />
+                      </span>
+                      <span class="sign_name">
+                        <strong>
+                          김창민
+                        </strong>
+                      </span>
+                    </span>
+                    <span class="sign_date_wrap">
+                      <span class="sign_date" id="date_14216049">
+                        2020/06/12
+                      </span>
+                    </span>
+                  </span>
+                </span>
+                <span class="sign_member_wrap" id="activity_14216060">
+                  <span class="sign_member">
+                    <span class="sign_rank_wrap">
+                      <span class="sign_rank">
+                        본부장
+                      </span>
+                    </span>
+                    <span class="sign_wrap">
+                      <span class="sign_stamp">
+                        <img src="http://mrplan.daouoffice.com:80/resources/images/stamp_approved.png" />
+                      </span>
+                      <span class="sign_name">
+                        <strong>
+                          장향인
+                        </strong>
+                      </span>
+                    </span>
+                    <span class="sign_date_wrap">
+                      <span class="sign_date" id="date_14216060">
+                        2020/06/12
+                      </span>
+                    </span>
+                  </span>
+                </span>
+                <span class="sign_member_wrap" id="activity_14216061">
+                  <span class="sign_member">
+                    <span class="sign_rank_wrap">
+                      <span class="sign_rank">
+                        대표이사
+                      </span>
+                    </span>
+                    <span class="sign_wrap">
+                      <span class="sign_stamp">
+                        <img src="http://mrplan.daouoffice.com:80/resources/images/stamp_approved.png" />
+                      </span>
+                      <span class="sign_name">
+                        <strong>
+                          박창영
+                        </strong>
+                      </span>
+                    </span>
+                    <span class="sign_date_wrap">
+                      <span class="sign_date" id="date_14216061">
+                        2020/06/15
+                      </span>
+                    </span>
+                  </span>
+                </span>
+              </span>
+              <!-- 에디터 &nbsp; 버그. 개행과 공백을 최소화 시키자. -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="line-height: normal; font-family: "맑은 고딕", "malgun gothic", sans-serif; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;">
+    </div>
+    <div style="line-height: normal; font-family: "맑은 고딕", "malgun gothic", sans-serif; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;">
+      <table
+        style="border: 1px solid rgb(0, 0, 0); border-image: none; width: 800px; height: 97px; margin-top: 10px; border-collapse: collapse;">
+        <colgroup>
+        </colgroup>
+        <colgroup>
+          <col width="120" />
+        </colgroup>
+        <colgroup>
+          <col width="680" />
+        </colgroup>
+        <tbody>
+          <tr>
+            <td
+              style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; width: 73px; height: 32px; text-align: center; color: rgb(0, 0, 0); font-weight: bold; vertical-align: middle;">
+              <p style='line-height: 1.5; font-family: "맑은 고딕"; font-size: 12pt; margin-top: 0px; margin-bottom: 0px;'>
+                <span
+                  style='line-height: 1.5; font-family: "맑은 고딕"; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;'>
+                  제목
+                </span>
+              </p>
+            </td>
+            <td
+              style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; width: 680px; height: 32px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;">
+              <p
+                style="line-height: 1.5; font-family: malgun gothic,dotum,arial,tahoma; font-size: 11pt; margin-top: 0px; margin-bottom: 0px;">
+                <span data-type="text" data-dsl="{{text:subject}}" data-id="subject" data-name="subject"
+                  data-value="[[draftTitle]]" data-require="false" data-maxlength="" data-width="" data-defaultstr=""
+                  data-editable="true" data-select="[[draftTitle]]" data-select-option="true">[[기안 제목]]</span>
+                <br />
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td
+              style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; width: 73px; height: 25px; text-align: center; color: rgb(0, 0, 0); font-weight: bold; vertical-align: middle;">
+              <p style='line-height: 1.5; font-family: "맑은 고딕"; font-size: 12pt; margin-top: 0px; margin-bottom: 0px;'>
+                <span
+                  style='line-height: 1.5; font-family: "맑은 고딕"; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;'>
+                  기안내용
+                </span>
+              </p>
+            </td>
+            <td
+              style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle; width: 1020px;">
+              <span class="editor_span" data-type="editor" data-dsl="{{editor}}" data-id="editorForm_5"
+                data-name="editorForm_5" data-value="" style="width:100%" data-require="false" data-maxlength=""
+                data-width="" data-defaultstr="" data-editable="true" data-select="">
+                <p style="dotum;; font-size: 12pt; line-height: 150%; margin-top: 0px; margin-bottom: 0px;">
+                  [[사업]]&nbsp;<[[과제]]&nbsp;([[연차]])>
+                    &nbsp;연구를&nbsp;수행함에&nbsp;있어,&nbsp;아래와&nbsp;같이&nbsp;연구&nbsp;수행을&nbsp;위한&nbsp;야근&nbsp;식대를&nbsp;사용할&nbsp;예정이오니,&nbsp;업무&nbsp;참조&nbsp;부탁드립니다.
+                </p>
+                <p style="margin: 0px; padding: 0px; line-height: 25px; font-size: 12pt; dotum;;"><span
+                    style="line-height: 25px; margin-top: 0px; margin-bottom: 0px; font-size: 12pt; dotum;;"><br></span>
+                </p>
+                <p style="margin: 0px; padding: 0px; line-height: 25px; font-size: 12pt; dotum;; text-align: center;">
+                  <span style="line-height: 25px; margin-top: 0px; margin-bottom: 0px; font-size: 12pt; dotum;;"><span
+                      style="font-size: 12pt; line-height: 25px; margin-top: 0px; margin-bottom: 0px; dotum;;">- 아래
+                      -</span></span></p>
+                <p style="margin: 0px; padding: 0px; line-height: 25px; font-size: 12pt; dotum;;"><span
+                    style="line-height: 25px; margin-top: 0px; margin-bottom: 0px; font-size: 12pt; dotum;;"><br></span>
+                </p>
+                <p style="margin: 0px; padding: 0px; line-height: 25px; font-size: 12pt; dotum;;"><span
+                    style="line-height: 25px; margin-top: 0px; margin-bottom: 0px; font-size: 12pt; dotum;;"><span
+                      style="font-size: 12pt; line-height: 25px; margin-top: 0px; margin-bottom: 0px; dotum;;">1.
+                      과제명:&nbsp;</span></span><span style="font-size: 12pt; dotum;;">[[과제]]</span></p>
+                <p style="margin: 0px; padding: 0px; line-height: 25px; font-size: 12pt; dotum;;"><span
+                    style="line-height: 25px; margin-top: 0px; margin-bottom: 0px; font-size: 12pt; dotum;;"><span
+                      style="font-size: 12pt; line-height: 25px; margin-top: 0px; margin-bottom: 0px; dotum;;">2. 연구기간:
+                      ([[연차]]) [[시작일]] ~ [[종료일]]</span></span></p>
+                <p style="margin: 0px; padding: 0px; line-height: 25px; font-size: 12pt; dotum;;"><span
+                    style="line-height: 25px; margin-top: 0px; margin-bottom: 0px; font-size: 12pt; dotum;;"><span
+                      style="font-size: 12pt; line-height: 25px; margin-top: 0px; margin-bottom: 0px; dotum;;">3. 연구비 활용
+                      내용</span></span></p>
+                <p style="margin: 0px; padding: 0px; line-height: 25px; font-size: 12pt; dotum;;"><br></p>
+                <table
+                  style="color: rgb(0, 0, 0); font-family: dotum, dotum, AppleGothic, arial, Helvetica, dotum; font-size: 12px; word-break: normal; line-height: 1.5; background-color: rgb(255, 255, 255); border-collapse: collapse; table-layout: fixed; border-width: initial; border-style: none; border-color: initial; height: 83.6364px;">
+                  <tbody>
+                    <tr>
+                      <td colspan="2" valign="middle"
+                        style="word-break: break-all; padding: 0.75pt; width: 247px; height: 20px; border-width: 2px 2px 2px 0px; border-style: solid solid solid none; border-color: rgb(0, 0, 0); background: rgb(194, 194, 194);"
+                        class="dext_table_border_l">
+                        <p
+                          style="margin: 0pt; padding: 0px; line-height: 1.8; text-indent: 0pt; vertical-align: baseline; letter-spacing: 0pt; text-align: center; dotum;; font-size: 12pt;">
+                          <strong><span style="font-size: 12pt; dotum;;">사용 일자</span></strong></p>
+                      </td>
+                      <td valign="middle"
+                        style="word-break: break-all; padding: 0.75pt; width: 387px; height: 20px; border-width: 2px 0px 2px 2px; border-style: solid none solid solid; border-color: rgb(0, 0, 0);"
+                        class="dext_table_border_r">
+                        <p
+                          style="margin: 0px; padding: 0px; line-height: 24px; text-align: center; dotum;; font-size: 12pt;">
+                          <span
+                            style="font-size: 12pt; line-height: 20px; margin-top: 0px; margin-bottom: 0px; dotum;;">[[draftDate]]</span>
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" valign="middle"
+                        style="word-break: break-all; padding: 0.75pt; width: 247px; height: 20px; border-width: 2px 2px 2px 0px; border-style: solid solid solid none; border-color: rgb(0, 0, 0); background: rgb(194, 194, 194);"
+                        class="dext_table_border_l">
+                        <p
+                          style="margin: 0pt; padding: 0px; line-height: 1.8; text-indent: 0pt; vertical-align: baseline; letter-spacing: 0pt; text-align: center; dotum;; font-size: 12pt;">
+                          <strong><span
+                              style="line-height: 24px; margin-top: 0px; margin-bottom: 0px; font-size: 12pt; dotum;;"><span
+                                style="font-size: 12pt; line-height: 24px; margin-top: 0px; margin-bottom: 0px; dotum;;">구매
+                                목적</span></span></strong></p>
+                      </td>
+                      <td valign="middle"
+                        style="word-break: break-all; padding: 0.75pt; width: 387px; height: 20px; border-width: 2px 0px 2px 2px; border-style: solid none solid solid; border-color: rgb(0, 0, 0);"
+                        class="dext_table_border_r">
+                        <p
+                          style="margin: 0pt; padding: 0px; line-height: 1.8; text-indent: 0pt; text-align: center; vertical-align: baseline; letter-spacing: 0pt; dotum;; font-size: 12pt;">
+                          <span style="font-size: 12pt; dotum;;">[[purpose]]</span></p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" valign="middle"
+                        style="word-break: break-all; padding: 0.75pt; width: 247px; height: 10px; border-width: 2px 2px 2px 0px; border-style: solid solid solid none; border-color: rgb(0, 0, 0); background: rgb(194, 194, 194);"
+                        class="dext_table_border_l">
+                        <p
+                          style="margin: 0pt; padding: 0px; line-height: 1.8; text-indent: 0pt; vertical-align: baseline; letter-spacing: 0pt; text-align: center; dotum;; font-size: 12pt;">
+                          <strong><span
+                              style="line-height: 24px; margin-top: 0px; margin-bottom: 0px; font-size: 12pt; dotum;;"><span
+                                style="font-size: 12pt; line-height: 24px; margin-top: 0px; margin-bottom: 0px; dotum;;">수행
+                                구매 내역</span></span></strong></p>
+                      </td>
+                      <td valign="middle"
+                        style="word-break: break-all; padding: 0.75pt; width: 387px; height: 10px; border-width: 2px 0px 2px 2px; border-style: solid none solid solid; border-color: rgb(0, 0, 0);"
+                        class="dext_table_border_r">
+                        <p
+                          style="margin: 0pt; padding: 0px; line-height: 1.8; text-indent: 0pt; text-align: center; vertical-align: baseline; letter-spacing: 0pt; dotum;; font-size: 12pt;">
+                          <span
+                            style="font-size: 12pt; line-height: 23.9999px; margin-top: 0px; margin-bottom: 0px; dotum;;">[[item]]</span>
+                        </p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p style="margin: 0px; padding: 0px; line-height: 20px; font-size: 10pt; dotum;;"><br></p>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br />
+    </div>
+    <div style="line-height: normal; font-family: "맑은 고딕", "malgun gothic", sans-serif; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">
+      <span
+        style='line-height: normal; font-family: "malgun gothic", dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;'>
+        <!-- Draft -->
+      </span>
+      <span
+        style='line-height: normal; font-family: "malgun gothic", dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;'>
+      </span>
+      <span
+        style='line-height: normal; font-family: "malgun gothic", dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;'>
+      </span>
+      <span
+        style='line-height: normal; font-family: "malgun gothic", dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;'>
+      </span>
+    </div>
+    <div style="line-height: normal; font-family: "맑은 고딕", "malgun gothic", sans-serif; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;">
+    </div>
+  </span>
+</body>
+
+</html>
