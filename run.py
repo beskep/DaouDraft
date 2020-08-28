@@ -1,13 +1,12 @@
-import json
+from pathlib import Path
 import logging
 import logging.config
-import os
 import sys
-from pathlib import Path
 
-import fire
-import bs4
+import yaml
 from rich.logging import RichHandler
+import bs4
+import fire
 
 ROOT_DIR = Path('.')
 SRC_DIR = ROOT_DIR / 'src'
@@ -18,17 +17,16 @@ from draft import daou_draft, template
 
 
 def main(mode='draft'):
-  log_setting_path = ROOT_DIR / 'logging.json'
+  config_path = ROOT_DIR / 'logging.yaml'
 
-  if log_setting_path.exists():
-    with open(log_setting_path, 'r') as f:
-      config = json.load(f)
+  if config_path.exists():
+    config = daou_draft.read_option(config_path)
     logging.config.dictConfig(config)
 
     root_logger = logging.getLogger()
     root_logger.addHandler(RichHandler(level=logging.INFO, show_time=False))
   else:
-    raise FileNotFoundError(log_setting_path)
+    raise FileNotFoundError(config_path)
 
   logger = logging.getLogger(__name__)
   logger.debug('Started')
@@ -49,5 +47,3 @@ def main(mode='draft'):
 
 if __name__ == "__main__":
   fire.Fire(main)
-
-  # os.system('pause')

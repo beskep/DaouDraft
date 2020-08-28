@@ -1,11 +1,10 @@
-from collections import OrderedDict
 from pathlib import Path
 from subprocess import run
 import datetime
-import json
-import os
 import logging
+import os
 import re
+import yaml
 
 import bs4
 
@@ -13,9 +12,19 @@ ROOT_DIR = Path(__file__).parents[2]
 WKHTMLTOX_PATH = ROOT_DIR / 'src/wkhtmltox/bin/wkhtmltopdf.exe'
 STAMP_PATH = ROOT_DIR / 'src/stamp_approved.png'
 
-for p in [WKHTMLTOX_PATH, STAMP_PATH]:
-  if not p.exists():
-    raise FileNotFoundError(p)
+
+def read_option(fname):
+  path = ROOT_DIR / fname
+
+  try:
+    with open(path, 'r', encoding='utf-8') as f:
+      option = yaml.load(f, Loader=yaml.FullLoader)
+  except FileNotFoundError as e:
+    logger = logging.getLogger(__name__)
+    logger.error('Option 파일이 없습니다: {}'.format(path))
+    raise e
+
+  return option
 
 
 class DaouDraft:
@@ -166,10 +175,11 @@ class DaouDraft:
       elif key == 'signDate':
         self.change_sign_date(value)
       else:
-        self._logger.warn('잘못된 옵션: "{}: {}"'.format(key, value))
+        self._logger.warning('잘못된 옵션: "{}: {}"'.format(key, value))
 
 
 class Runner:
+  _option_file = 'option_draft.yaml'
 
   def __init__(self) -> None:
     self._logger = logging.getLogger('{}.{}'.format(
@@ -189,14 +199,7 @@ class Runner:
       for x in drafts:
         self._logger.info(str(x))
     self._drafts = drafts
-
-    option_path = ROOT_DIR / 'option.json'
-    try:
-      with open(option_path, 'r', encoding='utf-8') as f:
-        self._option: OrderedDict = json.load(f, object_pairs_hook=OrderedDict)
-    except FileNotFoundError as e:
-      self._logger.error('Option 파일이 없습니다: {}'.format(option_path))
-      raise e
+    self._option = read_option(self._option_file)
 
   def run(self, drafts=None):
     if drafts is None:
@@ -213,13 +216,17 @@ class Runner:
 
       fname = os.path.split(path)[1]
 
-      for pattern, options in self._option.items():
+      for options in self._option:
+        if len(options) != 1:
+          self._logger.error('Option 형식 오류: {}'.format(options))
+        pattern, opts = options.copy().popitem()
+
         if not pattern.startswith('.*'):
           pattern = '.*' + pattern
 
         if pattern == '.*' or re.match(pattern, fname):
           self._logger.info('문서 "{}"에 옵션 "{}" 적용'.format(fname, pattern))
-          draft.change_by_dict(options=options)
+          draft.change_by_dict(options=opts)
 
       res_path = os.path.normpath(os.path.join(res_dir, fname))
       draft.save(res_path)
@@ -227,6 +234,11 @@ class Runner:
 
 
 def to_pdf(html_path):
+  if not WKHTMLTOX_PATH.exists():
+    logger = logging.getLogger(__name__)
+    logger.error('PDF 변환 불가. {} 미발견'.format(WKHTMLTOX_PATH))
+    raise FileNotFoundError(WKHTMLTOX_PATH)
+
   dir_, fname = os.path.split(html_path)
   fname = os.path.splitext(fname)[0]
   pdf_path = os.path.join(dir_, fname + '.pdf')

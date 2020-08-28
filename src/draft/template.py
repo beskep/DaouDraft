@@ -1,17 +1,18 @@
+from collections import OrderedDict
+from copy import deepcopy
+from pathlib import Path
 import json
 import logging
 import os
 import re
 import sys
-from collections import OrderedDict
-from pathlib import Path
 
 ROOT_DIR = Path(__file__).parents[2]
 SRC_DIR = ROOT_DIR / 'src'
 if str(SRC_DIR) not in sys.path:
   sys.path.append(str(SRC_DIR))
 
-from draft.daou_draft import DaouDraft, to_pdf
+from draft.daou_draft import DaouDraft, to_pdf, read_option
 
 TEMPLATES = ('야근식대', '인쇄비')
 DATE_PATTERN = re.compile('\d{4}\.\d{2}\.\d{2}')
@@ -56,16 +57,28 @@ class DraftTemplate:
     self._toption: dict = template_option[template]
     self.global_change()
 
-  def global_change(self):
-    project = self._toption['과제']
+  @property
+  def goption(self):
+    return deepcopy(self._goption)
 
-    for pattern, options in self._goption.items():
+  @property
+  def toption(self):
+    return deepcopy(self._toption)
+
+  def global_change(self):
+    project = self.toption['과제']
+
+    for options in self.goption:
+      if len(options) != 1:
+        self._logger.error('Option 형식 오류: {}'.format(options))
+      pattern, opts = options.popitem()
+
       if not pattern.startswith('.*'):
         pattern = '.*' + pattern
 
       if pattern == '.*' or re.match(pattern, project):
         self._logger.info('"{}" 과제에 옵션 "{}" 적용'.format(project, pattern))
-        self._draft.change_by_dict(options)
+        self._draft.change_by_dict(opts)
 
   def change_template(self):
     pass
@@ -84,14 +97,17 @@ class DraftTemplateOvertime(DraftTemplate):
     if not res_dir.exists():
       os.makedirs(res_dir)
 
-    for key in ['사업', '과제', '연차', '기안 제목']:
-      draft = draft.replace('[[{}]]'.format(key), self._toption.pop(key))
+    toption = self.toption
 
-    period = self._toption.pop('연구 기간')
+    for key in ['사업', '과제', '연차', '기안 제목']:
+      draft = draft.replace('[[{}]]'.format(key), toption[key])
+
+    period = toption['연구 기간']
     draft = draft.replace('[[시작일]]', period[0])
     draft = draft.replace('[[종료일]]', period[1])
 
-    for date, options in self._toption.items():
+    for dateopt in toption['목록']:
+      date, options = dateopt.popitem()
       if not DATE_PATTERN.match(date):
         self._logger.warn('일자 형식 불일치: {}'.format(date))
 
@@ -122,14 +138,17 @@ class DraftTemplatePrint(DraftTemplate):
     if not res_dir.exists():
       os.makedirs(res_dir)
 
-    for key in ['사업', '과제', '연차', '기안 제목']:
-      draft = draft.replace('[[{}]]'.format(key), self._toption.pop(key))
+    toption = self.toption
 
-    period = self._toption.pop('연구 기간')
+    for key in ['사업', '과제', '연차', '기안 제목']:
+      draft = draft.replace('[[{}]]'.format(key), toption[key])
+
+    period = toption['연구 기간']
     draft = draft.replace('[[시작일]]', period[0])
     draft = draft.replace('[[종료일]]', period[1])
 
-    for date, options in self._toption.items():
+    for dateopt in toption['목록']:
+      date, options = dateopt.popitem()
       if not DATE_PATTERN.match(date):
         self._logger.warn('일자 형식 불일치: {}'.format(date))
 
@@ -148,7 +167,9 @@ class DraftTemplatePrint(DraftTemplate):
 
 
 def run():
-  goption = read_options('option.json')
-  toption = read_options('option_template.json')
+  # goption = read_options('option.json')
+  # toption = read_options('option_template.json')
+  goption = read_option('option_draft.yaml')
+  toption = read_option('option_template.yaml')
   DraftTemplateOvertime(goption, toption).change_template()
   DraftTemplatePrint(goption, toption).change_template()
