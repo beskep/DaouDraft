@@ -4,27 +4,19 @@ import datetime
 import logging
 import os
 import re
-import yaml
+import sys
 
 import bs4
 
 ROOT_DIR = Path(__file__).parents[2]
+SRC_DIR = ROOT_DIR / 'src'
+if str(SRC_DIR) not in sys.path:
+  sys.path.append(str(SRC_DIR))
+
+from draft.read_option import read_option
+
 WKHTMLTOX_PATH = ROOT_DIR / 'src/wkhtmltox/bin/wkhtmltopdf.exe'
 STAMP_PATH = ROOT_DIR / 'src/stamp_approved.png'
-
-
-def read_option(fname):
-  path = ROOT_DIR / fname
-
-  try:
-    with open(path, 'r', encoding='utf-8') as f:
-      option = yaml.load(f, Loader=yaml.FullLoader)
-  except FileNotFoundError as e:
-    logger = logging.getLogger(__name__)
-    logger.error('Option 파일이 없습니다: {}'.format(path))
-    raise e
-
-  return option
 
 
 class DaouDraft:

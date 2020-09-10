@@ -14,13 +14,14 @@ if str(SRC_DIR) not in sys.path:
   sys.path.append(str(SRC_DIR))
 
 from draft import daou_draft, template
+from draft.read_option import read_option
 
 
 def main(mode='draft'):
   config_path = ROOT_DIR / 'logging.yaml'
 
   if config_path.exists():
-    config = daou_draft.read_option(config_path)
+    config = read_option(config_path)
     logging.config.dictConfig(config)
 
     root_logger = logging.getLogger()

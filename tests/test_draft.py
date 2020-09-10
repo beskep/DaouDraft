@@ -1,10 +1,9 @@
-from json import load
-from pathlib import Path
-import pytest
-import bs4
 import os
 import sys
 from datetime import datetime
+
+import bs4
+import pytest
 
 sys.path.append(os.path.join(__file__, '../../src'))
 
@@ -70,9 +69,6 @@ def test_img(draft: daou_draft.DaouDraft):
 
 def test_runner():
   runner = daou_draft.Runner()
-  # runner.run([
-  #     r'D:\Python\etc\DaouDraft\documents\연구 계획 변경 건 (신규 연구원 참여, 한국연구재단 친환경 통합 과제)_2020-07-13_14-39.html'
-  # ])
   runner.run()
 
 

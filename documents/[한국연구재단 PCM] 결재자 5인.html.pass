@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <meta name="viewport" content="initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" />
+  <style type="text/css">
+    body,
+    img,
+    p {
+      margin: 0;
+      padding: 0
+    }
+
+    span.editor_span {
+      display: block;
+      width: auto !important;
+      margin: 5px
+    }
+
+    span.editor_span table {
+      word-break: normal
+    }
+
+    span.editor_span,
+    span.editor_span table,
+    span.editor_span p,
+    span.editor_span span {
+      font-size: 12px;
+      font-family: dotum;
+      line-height: 1.5
+    }
+
+    .editor_span td {
+      padding: 0 !important
+    }
+
+    .editor_span ol,
+    .editor_span ul {
+      list-style-position: inside;
+      padding-left: 40px
+    }
+
+    img {
+      border: 0
+    }
+
+    /* sign_type1 */
+    div.sign_type1 {
+      display: inline-block;
+      margin-right: -1px;
+      font-size: 12px
+    }
+
+    div.sign_type1.last table.tb_sign_type1 {
+      border-left: 0
+    }
+
+    div.sign_type1 table.tb_sign_type1,
+    table.sign_member {
+      border-spacing: 0;
+      border-collapse: collapse;
+      width: 60px
+    }
+
+    div.sign_type1 table.tb_sign_type1 {
+      border: 1px solid #666
+    }
+
+    div.sign_type1 table.tb_sign_type1 tbody tr th {
+      width: 20px;
+      background: #eee;
+      padding: 4px;
+      text-align: center;
+      word-break: break-word;
+      white-space: normal
+    }
+
+    div.sign_type1 table.tb_sign_type1 tbody tr td {
+      border-left: 1px solid #666;
+      padding: 0 !important
+    }
+
+    div.sign_type1 table.tb_sign_type1 tbody tr td table.sign_member tbody tr td {
+      height: 26px;
+      border-left: 0;
+      border-bottom: 1px solid #666;
+      min-height: 26px;
+      vertical-align: middle
+    }
+
+    div.sign_type1 table.tb_sign_type1 tbody tr td table.sign_member tbody tr td.last {
+      border-bottom: 0
+    }
+
+    div.sign_type1 table.tb_sign_type1 tbody tr td table.sign_member tbody tr td span {
+      display: block;
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 70px;
+      padding: 4px;
+      font-size: 12px
+    }
+
+    div.sign_type1 table.tb_sign_type1 tbody tr td table.sign_member tbody tr td span.sign_name {
+      height: 36px
+    }
+
+    div.sign_type1 table.tb_sign_type1 tbody tr td table.sign_member tbody tr td span.arbitrary {
+      background: url(../images/arbitrary.gif) no-repeat
+    }
+
+    div.sign_type1 table.tb_sign_type1 tbody tr td table.sign_member tbody tr td span img {
+      width: auto;
+      height: 100%
+    }
+
+    div.sign_type1 table.tb_sign_type1 tbody tr td table.sign_member tbody tr td span.doc_return {
+      padding: 0;
+    }
+
+    /* sign_type_new */
+    div.sign_type_new {
+      display: inline-block;
+      margin-right: -1px;
+      font-size: 12px
+    }
+
+    div.sign_type_new.last table.tb_sign_type1 {
+      border-left: 0
+    }
+
+    div.sign_type_new table.tb_sign_type1 {
+      border: 1px solid #666
+    }
+
+    div.sign_type_new table.tb_sign_type1 tbody tr td table.sign_member tbody tr td span.sign_name {
+      height: auto
+    }
+
+    div.sign_type_new table.tb_sign_type1 tbody tr th {
+      width: 15px;
+      background: #eee;
+      padding: 6px;
+      text-align: center;
+      word-break: break-word;
+      white-space: normal
+    }
+
+    div.sign_type_new table.tb_sign_type1 tbody tr td {
+      border-left: 1px solid #666;
+      padding: 0 !important
+    }
+
+    div.sign_type_new table.tb_sign_type1 tbody tr td table.sign_member tbody tr td {
+      height: 26px;
+      border-left: 0;
+      border-bottom: 1px solid #666;
+      min-height: 26px
+    }
+
+    div.sign_type_new table.tb_sign_type1 tbody tr td table.sign_member tbody tr td.last {
+      border-bottom: 0
+    }
+
+    div.sign_type_new table.tb_sign_type1 tbody tr td table.sign_member tbody tr td span {
+      display: block;
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 70px;
+      font-size: 12px;
+      padding: 2px 4px
+    }
+
+    div.sign_type_new table.tb_sign_type1 tbody tr td table.sign_member tbody tr td.wrap_name,
+    div.sign_type_new table.tb_sign_type1 tbody tr td table.sign_member tbody tr td.wrap_position,
+    div.sign_type_new table.tb_sign_type1 tbody tr td table.sign_member tbody tr td.wrap_rank,
+    div.sign_type_new table.tb_sign_type1 tbody tr td table.sign_member tbody tr td.wrap_type {
+      height: 48px;
+      text-align: center
+    }
+
+    div.sign_type_new table.tb_sign_type1 tbody tr td table.sign_member tbody tr td.wrap_sign {
+      height: 74px;
+      text-align: center
+    }
+
+    div.sign_type_new table.tb_sign_type1 tbody tr td table.sign_member tbody tr td span.sign_stamp {
+      height: 40px;
+      padding-bottom: 0
+    }
+
+    div.sign_type_new table.tb_sign_type1 tbody tr td table.sign_member tbody tr td span.sign_stamp img {
+      width: auto;
+      height: 100%
+    }
+
+    div.sign_type_new table.tb_sign_type1 tbody tr td table.sign_member tbody tr td span.arbitrary {
+      background: url(../images/arbitrary.gif) no-repeat;
+      height: 36px;
+      padding: 0
+    }
+
+    div.sign_type_new table.tb_sign_type1 tbody tr td table.sign_member tbody tr td.wrap_arbitrary {
+      padding: 0
+    }
+
+    /* sign_type2 */
+    span.sign_type2 span.sign_member {
+      border: 1px solid #000;
+      padding: 4px;
+      display: block;
+      margin: 0 0 -1px
+    }
+
+    span.sign_type2 span.sign_member span.name {
+      color: #333
+    }
+
+    span.sign_type2 span.sign_member span.date {
+      margin: 0 !important
+    }
+
+    span.sign_type2 span.sign_member span.rank {
+      margin: 0 0 0 4px
+    }
+
+    /* sign_type1_iline */
+    .sign_type1_inline {
+      position: relative;
+      display: inline-table !important;
+      border-collapse: separate;
+      border-spacing: 0;
+      white-space: normal;
+      font-size: 12px;
+      margin: 1px -1px 0 0;
+      padding: 0 0 0 26px;
+    }
+
+    .sign_type1_inline:after {
+      display: block;
+      clear: left;
+      overflow: hidden;
+      height: 0;
+      content: ''
+    }
+
+    .sign_type1_inline .sign_tit_wrap {
+      position: absolute;
+      top: -1px;
+      left: 0;
+      bottom: 0;
+      vertical-align: middle;
+      border: 1px solid #000;
+      width: 24px;
+      background: #eee;
+      display: table-cell
+    }
+
+    .sign_type1_inline .sign_tit_wrap .sign_tit {
+      display: table;
+      padding: 0 2px;
+      text-align: center;
+      word-break: break-all;
+      white-space: normal;
+      height: 100%
+    }
+
+    .sign_type1_inline .sign_tit_wrap .sign_tit strong {
+      display: table-cell;
+      vertical-align: middle
+    }
+
+    .sign_type1_inline .sign_member_wrap {
+      vertical-align: top;
+      background: #fff;
+      display: table-cell;
+      float: left;
+      border: 1px solid #000;
+      border-left: 0;
+      margin: -1px 0 0 0
+    }
+
+    .sign_type1_inline .sign_member_wrap .sign_member {
+      width: 79px;
+      vertical-align: top;
+      display: table;
+      table-layout: fixed
+    }
+
+    .sign_type1_inline .sign_member_wrap .sign_member .sign_rank_wrap,
+    .sign_type1_inline .sign_member_wrap .sign_member .sign_date_wrap {
+      display: table-row
+    }
+
+    .sign_type1_inline .sign_member_wrap .sign_member .sign_rank,
+    .sign_type1_inline .sign_member_wrap .sign_member .sign_wrap,
+    .sign_type1_inline .sign_member_wrap .sign_member .sign_date {
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+      width: 79px
+    }
+
+    .sign_type1_inline .sign_member_wrap .sign_member .sign_rank {
+      height: 26px
+    }
+
+    .sign_type1_inline .sign_member_wrap .sign_member .sign_wrap {
+      height: 75px;
+      border-top: 1px solid #000
+    }
+
+    .sign_type1_inline strong {
+      font-weight: bold;
+    }
+
+    .sign_type1_inline .sign_member_wrap .sign_member .sign_wrap .arbitrary {
+      background: url(../images/arbitrary.gif) no-repeat;
+      height: 40px;
+      width: 79px;
+      padding: 0;
+    }
+
+    .sign_type1_inline .sign_member_wrap .sign_member .sign_date {
+      height: 26px;
+      border-top: 1px solid #000
+    }
+
+    .sign_type1_inline .sign_member_wrap .sign_member .sign_stamp {
+      width: 79px;
+      height: 40px
+    }
+
+    .sign_type1_inline .sign_member_wrap .sign_member .sign_stamp img {
+      width: auto;
+      height: 100%;
+    }
+
+    .sign_type1_inline .sign_member_wrap .sign_member .sign_wrap>span {
+      padding: 2px 0;
+      display: block
+    }
+
+    .sign_type1_inline .sign_rank,
+    .sign_type1_inline .sign_name,
+    .sign_type1_inline .sign_position,
+    .sign_type1_inline .sign_type,
+    .sign_type1_inline .sign_date {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 79px;
+    }
+
+    .sign_arbitrary {
+      background: url(../images/arbitrary.gif) no-repeat;
+      height: 40px;
+      width: 79px;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body> <span
+    style="line-height: normal; font-family: &quot;맑은 고딕&quot;; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;"><span
+      style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;"><span
+        style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;"><span
+          style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;"><span
+            style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;"><span
+              style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;"><span
+                style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;"><span
+                  style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;"><span
+                    style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;"><span
+                      style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">
+                    </span></span></span></span></span></span></span></span></span>
+    <div style="line-height: normal; font-family: 돋움; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;"> <span
+        style="line-height: normal; font-family: 돋움; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;"> </span>
+    </div>
+    <div style="line-height: normal; font-family: 돋움; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;"> <span
+        style="line-height: normal; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;">
+        <!-- Header --> </span> <span
+        style="line-height: normal; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;">
+      </span> <span
+        style="line-height: normal; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;">
+      </span> <span
+        style="line-height: normal; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;">
+      </span>
+      <table
+        style="border: 0px solid rgb(0, 0, 0); border-image: none; width: 800px; font-family: malgun gothic,dotum,arial,tahoma; margin-top: 1px; border-collapse: collapse;">
+        <colgroup></colgroup>
+        <colgroup>
+          <col width="310" />
+        </colgroup>
+        <colgroup>
+          <col width="490" />
+        </colgroup>
+        <tbody>
+          <tr>
+            <td
+              style="background: white; padding: 0px !important; border: 0px currentColor; border-image: none; height: 90px; text-align: center; color: black; font-size: 36px; font-weight: bold; vertical-align: middle;"
+              colspan="2" class="">&nbsp;<span
+                style="line-height: normal; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; font-size: 24pt; margin-top: 0px; margin-bottom: 0px;">[
+                기안서 ]</span></td>
+          </tr>
+          <tr>
+            <td
+              style="background: white; padding: 0px !important; border: currentColor; border-image: none; width: 238px; text-align: left; color: black; font-weight: normal; vertical-align: top;">
+              <span
+                style="line-height: normal; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; font-size: 12px; margin-top: 0px; margin-bottom: 0px;">
+                <!-- User --> </span><span
+                style="line-height: normal; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; font-size: 12px; margin-top: 0px; margin-bottom: 0px;">
+              </span><span
+                style="line-height: normal; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; font-size: 12px; margin-top: 0px; margin-bottom: 0px;">
+              </span><span
+                style="line-height: normal; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; font-size: 12px; margin-top: 0px; margin-bottom: 0px;">
+              </span>
+              <table align=""
+                style="border: 1px rgb(0, 0, 0); width: 302px; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; font-size: 10pt; margin-top: 1px; border-collapse: collapse; height: 119px;">
+                <colgroup></colgroup>
+                <colgroup>
+                  <col width="90" />
+                </colgroup>
+                <colgroup>
+                  <col width="220" />
+                </colgroup>
+                <tbody>
+                  <tr>
+                    <td
+                      style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid rgb(0, 0, 0); width: 60px; height: 10px; text-align: center; color: rgb(0, 0, 0); font-weight: bold; vertical-align: middle;"
+                      scope=""><span
+                        style="font-size: 10pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; line-height: normal; margin-top: 0px; margin-bottom: 0px;">문서번호</span>
+                    </td>
+                    <td
+                      style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid rgb(0, 0, 0); width: 180px; height: 10px; text-align: left; color: rgb(0, 0, 0); font-weight: normal; vertical-align: middle;"
+                      scope=""><span data-type="system" data-dsl="{{label:docNo}}" data-id="docNo" data-name="docNo"
+                        data-value="미래환경플랜건축사사무소-2020-01055" data-require="false" data-maxlength="" data-width=""
+                        data-defaultstr="" data-editable="true" data-select="" data-select-option="true"
+                        value="미래환경플랜건축사사무소-2020-01055">미래환경플랜건축사사무소-2020-01055</span><span
+                        style="line-height: normal; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid rgb(0, 0, 0); width: 60px; height: 10px; text-align: center; color: rgb(0, 0, 0); font-weight: bold; vertical-align: middle;"
+                      scope=""><span
+                        style="font-size: 10pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; line-height: normal; margin-top: 0px; margin-bottom: 0px;">작
+                        성 일</span></td>
+                    <td
+                      style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid rgb(0, 0, 0); width: 180px; height: 10px; text-align: left; color: rgb(0, 0, 0); font-weight: normal; vertical-align: middle;"
+                      scope=""><span data-type="system" data-dsl="{{label:draftDate}}" data-id="draftDate"
+                        data-name="draftDate" data-value="2020-08-26(수)" data-require="false" data-maxlength=""
+                        data-width="" data-defaultstr="" data-editable="true" data-select="2020-08-26(수)"
+                        data-select-option="true" value="2020-08-26(수)">2020-08-26(수)</span><span
+                        style="line-height: normal; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid rgb(0, 0, 0); width: 60px; height: 10px; text-align: center; color: rgb(0, 0, 0); font-weight: bold; vertical-align: middle;"
+                      scope="">
+                      <p
+                        style="line-height: 1.5; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;">
+                        <span
+                          style="line-height: 20px; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;">부
+                          서 명</span></p>
+                    </td>
+                    <td
+                      style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid rgb(0, 0, 0); width: 180px; height: 10px; text-align: left; color: rgb(0, 0, 0); font-weight: normal; vertical-align: middle;"
+                      scope=""><span data-type="system" data-dsl="{{label:draftDept}}" data-id="draftDept"
+                        data-name="draftDept" data-value="친환경연구본부(건축신기술연구팀)" data-require="false" data-maxlength=""
+                        data-width="" data-defaultstr="" data-editable="true" data-select="친환경연구본부(건축신기술연구팀)"
+                        data-select-option="true" value="친환경연구본부(건축신기술연구팀)">친환경연구본부(건축신기술연구팀)</span><span
+                        style="line-height: normal; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid rgb(0, 0, 0); width: 60px; height: 10px; text-align: center; color: rgb(0, 0, 0); font-weight: bold; vertical-align: middle;"
+                      scope=""><span
+                        style="font-size: 10pt; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; line-height: normal; margin-top: 0px; margin-bottom: 0px;">작
+                        성 자</span></td>
+                    <td
+                      style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid rgb(0, 0, 0); width: 180px; height: 10px; text-align: left; color: rgb(0, 0, 0); font-weight: normal; vertical-align: middle;"
+                      scope=""><span data-type="system" data-dsl="{{label:draftUser}}" data-id="draftUser"
+                        data-name="draftUser" data-value="이기철" data-require="false" data-maxlength="" data-width=""
+                        data-defaultstr="" data-editable="true" data-select="이기철" data-select-option="true"
+                        value="이기철">이기철</span><span
+                        style="line-height: normal; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;"></span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table><span
+                style="line-height: normal; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; font-size: 12px; margin-top: 0px; margin-bottom: 0px;"></span>
+            </td>
+            <td
+              style="background: white; padding: 0px !important; border: currentColor; border-image: none; width: 561px; text-align: right; color: black; font-size: 12px; font-weight: normal; vertical-align: top;">
+              <span class="sign_type1_inline"
+                style="line-height: normal; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;"
+                data-group-seq="0" data-group-name="작성자" data-group-max-count="1" data-group-type="type1"
+                data-is-reception=""><span class="sign_tit_wrap"><span
+                    class="sign_tit"><strong>작성자</strong></span></span><span class="sign_member_wrap"
+                  id="activity_15231527"><span class="sign_member"><span class="sign_rank_wrap"><span
+                        class="sign_rank">사원</span></span><span class="sign_wrap"><span class="sign_stamp"><img
+                          src="http://mrplan.daouoffice.com:80/resources/images/stamp_approved.png" /></span><span
+                        class="sign_name"> <strong> 이기철 </strong> </span></span><span class="sign_date_wrap"><span
+                        class="sign_date " id="date_15231527">2020/08/26</span></span></span></span></span>
+              <!-- 에디터 &nbsp; 버그. 개행과 공백을 최소화 시키자. --> <span class="sign_type1_inline"
+                style="line-height: normal; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;"
+                data-group-seq="1" data-group-name="결재" data-group-max-count="10" data-group-type="type1"
+                data-is-reception=""><span class="sign_tit_wrap"><span
+                    class="sign_tit"><strong>결재</strong></span></span><span class="sign_member_wrap"
+                  id="activity_15232238"><span class="sign_member"><span class="sign_rank_wrap"><span
+                        class="sign_rank">과장</span></span><span class="sign_wrap"><span class="sign_stamp"><img
+                          src="http://mrplan.daouoffice.com:80/resources/images/stamp_approved.png" /></span><span
+                        class="sign_name"> <strong> 김창민 </strong> </span></span><span class="sign_date_wrap"><span
+                        class="sign_date " id="date_15232238">2020/08/26</span></span></span></span><span
+                  class="sign_member_wrap" id="activity_15232239"><span class="sign_member"><span
+                      class="sign_rank_wrap"><span class="sign_rank">과장</span></span><span class="sign_wrap"><span
+                        class="sign_stamp"><img
+                          src="http://mrplan.daouoffice.com:80/resources/images/stamp_approved.png" /></span><span
+                        class="sign_name"> <strong> 유동철 </strong> </span></span><span class="sign_date_wrap"><span
+                        class="sign_date " id="date_15232239">2020/08/26</span></span></span></span><span
+                  class="sign_member_wrap" id="activity_15232330"><span class="sign_member"><span
+                      class="sign_rank_wrap"><span class="sign_rank">본부장</span></span><span class="sign_wrap"><span
+                        class="sign_stamp"><img
+                          src="http://mrplan.daouoffice.com:80/resources/images/stamp_approved.png" /></span><span
+                        class="sign_name"> <strong> 장향인 </strong> </span></span><span class="sign_date_wrap"><span
+                        class="sign_date " id="date_15232330">2020/08/26</span></span></span></span><span
+                  class="sign_member_wrap" id="activity_15232331"><span class="sign_member"><span
+                      class="sign_rank_wrap"><span class="sign_rank">대표이사</span></span><span class="sign_wrap"><span
+                        class="sign_stamp"><img
+                          src="http://mrplan.daouoffice.com:80/resources/images/stamp_approved.png" /></span><span
+                        class="sign_name"> <strong> 박창영 </strong> </span></span><span class="sign_date_wrap"><span
+                        class="sign_date " id="date_15232331">2020/08/28</span></span></span></span></span>
+              <!-- 에디터 &nbsp; 버그. 개행과 공백을 최소화 시키자. -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="line-height: normal; font-family: 돋움; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;"> &nbsp;
+    </div>
+    <div style="line-height: normal; font-family: 돋움; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;">
+      <table
+        style="border: 1px solid rgb(0, 0, 0); border-image: none; width: 800px; height: 97px; margin-top: 10px; border-collapse: collapse;">
+        <colgroup></colgroup>
+        <colgroup>
+          <col width="120" />
+        </colgroup>
+        <colgroup>
+          <col width="680" />
+        </colgroup>
+        <tbody>
+          <tr>
+            <td
+              style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; width: 73px; height: 32px; text-align: center; color: rgb(0, 0, 0); font-weight: bold; vertical-align: middle;">
+              <p
+                style="line-height: 1.5; font-family: &quot;맑은 고딕&quot;; font-size: 12pt; margin-top: 0px; margin-bottom: 0px;">
+                <span
+                  style="line-height: 1.5; font-family: &quot;맑은 고딕&quot;; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">제목</span>
+              </p>
+            </td>
+            <td
+              style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; width: 680px; height: 32px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;">
+              <p
+                style="line-height: 1.5; font-family: malgun gothic,dotum,arial,tahoma; font-size: 11pt; margin-top: 0px; margin-bottom: 0px;">
+                <span data-type="text" data-dsl="{{text:subject}}" data-id="subject" data-name="subject"
+                  data-value="[한국연구재단 PCM] 자문비 지급 처리 요청의 건 " data-require="false" data-maxlength="" data-width=""
+                  data-defaultstr="" data-editable="true" data-select="[한국연구재단 PCM] 자문비 지급 처리 요청의 건 "
+                  data-select-option="true">[한국연구재단 PCM] 자문비 지급 처리 요청의 건 </span><br /></p>
+            </td>
+          </tr>
+          <tr>
+            <td
+              style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; width: 73px; height: 25px; text-align: center; color: rgb(0, 0, 0); font-weight: bold; vertical-align: middle;">
+              <p
+                style="line-height: 1.5; font-family: &quot;맑은 고딕&quot;; font-size: 12pt; margin-top: 0px; margin-bottom: 0px;">
+                <span
+                  style="line-height: 1.5; font-family: &quot;맑은 고딕&quot;; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;">기안내용</span>
+              </p>
+            </td>
+            <td
+              style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; width: 680px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;">
+              <span class="editor_span" data-type="editor" data-dsl="{{editor}}" data-id="editorForm_5"
+                data-name="editorForm_5" data-value="" style="width:100%" data-require="false" data-maxlength=""
+                data-width="" data-defaultstr="" data-editable="true" data-select="">
+                <p
+                  style="margin: 0px; padding: 0px; font-size: 10pt; line-height: 1.8; font-variant-numeric: normal; font-variant-east-asian: normal; background-color: rgb(255, 255, 255); font-family: &quot;맑은 고딕&quot;;">
+                  <span
+                    style="line-height: 1.8; margin-top: 0px; margin-bottom: 0px; font-size: 10pt; font-family: &quot;맑은 고딕&quot;;"><span
+                      style="font-family: 맑은; line-height: 1.8; letter-spacing: 0pt; text-align: justify; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;"><span
+                        style="font-family: dotum; line-height: 1.8; letter-spacing: 0pt; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;"><span
+                          style="font-family: 맑은; line-height: 1.8; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;">한국연구재단&nbsp;</span></span></span><span
+                      style="line-height: 1.8; font-size: 10pt; font-family: &quot;맑은 고딕&quot;;">이공분야기초연구사업</span><span
+                      style="font-family: 맑은; line-height: 1.8; letter-spacing: 0pt; text-align: justify; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;"><span
+                        style="font-family: dotum; line-height: 1.8; letter-spacing: 0pt; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;"><span
+                          style="font-family: 맑은; line-height: 1.8; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;">&nbsp;</span><span
+                          style="font-family: 맑은; line-height: 1.8; letter-spacing: 0pt; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;">'</span></span></span><span
+                      style="line-height: 1.8; font-size: 10pt; font-family: &quot;맑은 고딕&quot;;">국내&nbsp;기후&nbsp;맞춤형&nbsp;상변화물질(PCM)&nbsp;응용&nbsp;건물외피&nbsp;기술&nbsp;개발</span><span
+                      style="font-family: 맑은; line-height: 1.8; letter-spacing: 0pt; text-align: justify; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;"><span
+                        style="line-height: 1.8; letter-spacing: 0pt; margin-top: 0px; margin-bottom: 0px; font-size: 10pt; font-family: 맑은;"><span
+                          style="line-height: 1.8; letter-spacing: 0pt; margin-top: 0px; margin-bottom: 0px; font-size: 10pt; font-family: 맑은;">'</span>&nbsp;</span><span
+                        style="line-height: 1.8; margin-top: 0px; margin-bottom: 0px; font-size: 10pt; font-family: 맑은;">연구</span></span>를
+                    진행함에 있어&nbsp;</span><span
+                    style="line-height: 1.8; margin-top: 0px; margin-bottom: 0px; font-size: 10pt; font-family: &quot;맑은 고딕&quot;;">아래와
+                    같이 자문 활용 건에 따른 자문비를 지급하고자 하오니, 지급 처리를 요청드립니다.</span></p>
+                <p
+                  style="margin: 0px; padding: 0px; font-size: 10pt; line-height: 1.8; font-variant-numeric: normal; font-variant-east-asian: normal; background-color: rgb(255, 255, 255); font-family: &quot;맑은 고딕&quot;;">
+                  <span
+                    style="font-family: dotum; line-height: 1.8; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;"><br /></span>
+                </p>
+                <p
+                  style="margin: 0px; padding: 0px; font-size: 10pt; line-height: 1.8; font-variant-numeric: normal; font-variant-east-asian: normal; background-color: rgb(255, 255, 255); text-align: center; font-family: &quot;맑은 고딕&quot;;">
+                  <span
+                    style="line-height: 1.8; margin-top: 0px; margin-bottom: 0px; font-size: 10pt; font-family: &quot;맑은 고딕&quot;;">-
+                    아 래 -</span></p>
+                <p
+                  style="margin: 0px; padding: 0px; font-size: 10pt; line-height: 1.8; font-variant-numeric: normal; font-variant-east-asian: normal; background-color: rgb(255, 255, 255); text-align: center; font-family: &quot;맑은 고딕&quot;;">
+                  &nbsp;</p>
+                <p
+                  style="margin: 0px; padding: 0px; font-size: 10pt; line-height: 1.8; font-variant-numeric: normal; font-variant-east-asian: normal; background-color: rgb(255, 255, 255); font-family: &quot;맑은 고딕&quot;;">
+                  1. 연구과제 :&nbsp;<span
+                    style="line-height: 1.8; text-align: justify; font-size: 10pt; font-family: &quot;맑은 고딕&quot;;">국내&nbsp;기후&nbsp;맞춤형&nbsp;상변화물질(PCM)&nbsp;응용&nbsp;건물외피&nbsp;기술&nbsp;개발</span>&nbsp;(2차년도)
+                </p>
+                <p
+                  style="margin: 0px; padding: 0px; font-size: 10pt; line-height: 1.8; font-variant-numeric: normal; font-variant-east-asian: normal; background-color: rgb(255, 255, 255); font-family: &quot;맑은 고딕&quot;;">
+                  <span
+                    style="line-height: 1.8; margin-top: 0px; margin-bottom: 0px; font-size: 10pt; font-family: &quot;맑은 고딕&quot;;">2.
+                    연구기간 :&nbsp;</span><span
+                    style="font-family: 맑은; line-height: 1.8; letter-spacing: 0pt; text-align: justify; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;">2020</span><span
+                    style="font-family: 맑은; line-height: 1.8; text-align: justify; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;">년
+                    3</span><span
+                    style="font-family: 맑은; line-height: 1.8; text-align: justify; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;">월
+                    1</span><span
+                    style="font-family: 맑은; line-height: 1.8; text-align: justify; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;">일&nbsp;</span><span
+                    style="font-family: 맑은; line-height: 1.8; letter-spacing: 0pt; text-align: justify; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;">~
+                    2021</span><span
+                    style="font-family: 맑은; line-height: 1.8; text-align: justify; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;">년&nbsp;</span><span
+                    style="font-family: 맑은; line-height: 1.8; letter-spacing: 0pt; text-align: justify; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;">2</span><span
+                    style="font-family: 맑은; line-height: 1.8; text-align: justify; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;">월
+                    28</span><span
+                    style="font-family: 맑은; line-height: 1.8; text-align: justify; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;">일&nbsp;</span><span
+                    style="font-family: 맑은; line-height: 1.8; letter-spacing: 0pt; text-align: justify; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;">(2</span><span
+                    style="font-family: 맑은; line-height: 1.8; text-align: justify; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;">차년도</span><span
+                    style="font-family: 맑은; line-height: 1.8; letter-spacing: 0pt; text-align: justify; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;">)</span>
+                </p>
+                <p
+                  style="margin: 0px; padding: 0px; font-size: 10pt; line-height: 1.8; font-variant-numeric: normal; font-variant-east-asian: normal; background-color: rgb(255, 255, 255); font-family: &quot;맑은 고딕&quot;;">
+                  <span
+                    style="line-height: 1.8; margin-top: 0px; margin-bottom: 0px; font-size: 10pt; font-family: &quot;맑은 고딕&quot;;">3.
+                    자문내용 : PCM 시뮬레이션 방법에 대한 자문회의</span></p>
+                <p
+                  style="margin: 0px; padding: 0px; font-size: 10pt; line-height: 1.8; font-variant-numeric: normal; font-variant-east-asian: normal; background-color: rgb(255, 255, 255); font-family: &quot;맑은 고딕&quot;;">
+                  <span
+                    style="line-height: 1.8; margin-top: 0px; margin-bottom: 0px; font-size: 10pt; font-family: &quot;맑은 고딕&quot;;">4.
+                    지급내용 :</span></p>
+                <p
+                  style="margin: 0px; padding: 0px; font-size: 10pt; line-height: 1.8; background-color: rgb(255, 255, 255); font-family: &quot;맑은 고딕&quot;;">
+                  <span
+                    style="font-family: dotum; line-height: 1.8; font-variant-numeric: normal; font-variant-east-asian: normal; font-size: 10pt;">&nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></p>
+                <table border="1" cellspacing="0" cellpadding="0"
+                  style="word-break: normal; font-family: 돋움, dotum, AppleGothic, arial, Helvetica, sans-serif; line-height: 1.5; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); border: 1px rgb(0, 0, 0); width: 637px; border-collapse: collapse; height: 235px;">
+                  <tbody>
+                    <tr>
+                      <td rowspan="3"
+                        style="padding: 0px; word-break: break-all; border: 1px solid rgb(0, 0, 0); width: 123px; background-color: rgb(194, 194, 194); height: 75px;">
+                        <p
+                          style="margin: 0px; padding: 0px; line-height: 1.8; text-align: center; font-family: 돋움, dotum, AppleGothic, arial, Helvetica, sans-serif; font-size: 12pt;">
+                          <strong style="font-size: 10pt;">인적사항</strong></p>
+                      </td>
+                      <td
+                        style="padding: 0px; word-break: break-all; border: 1px solid rgb(0, 0, 0); width: 123px; height: 25px; background-color: rgb(194, 194, 194);">
+                        <p
+                          style="margin: 0px; padding: 0px; line-height: 1.8; text-align: center; font-family: 돋움, dotum, AppleGothic, arial, Helvetica, sans-serif; font-size: 12pt;">
+                          <strong style="font-size: 10pt;">성 명</strong></p>
+                      </td>
+                      <td
+                        style="padding: 0px; word-break: break-all; border: 1px solid rgb(0, 0, 0); width: 387px; height: 25px;">
+                        <p
+                          style="margin: 0pt; padding: 0px; line-height: 1.8; text-indent: 0pt; vertical-align: baseline; letter-spacing: 0pt; word-break: keep-all; font-family: 돋움, dotum, AppleGothic, arial, Helvetica, sans-serif; font-size: 12pt;">
+                          <span style="font-family: &quot;맑은 고딕&quot;; font-size: 10pt;">&nbsp;이강영</span></p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        style="padding: 0px; word-break: break-all; border: 1px solid rgb(0, 0, 0); width: 123px; height: 25px; background-color: rgb(194, 194, 194);">
+                        <p
+                          style="margin: 0px; padding: 0px; line-height: 1.8; text-align: center; font-family: 돋움, dotum, AppleGothic, arial, Helvetica, sans-serif; font-size: 12pt;">
+                          <strong style="font-size: 10pt;">소속 및 직책</strong></p>
+                      </td>
+                      <td
+                        style="padding: 0px; word-break: break-all; border: 1px solid rgb(0, 0, 0); width: 387px; height: 25px;">
+                        <p
+                          style="margin: 0pt; padding: 0px; line-height: 1.8; text-indent: 0pt; vertical-align: baseline; letter-spacing: 0pt; word-break: keep-all; font-family: 돋움, dotum, AppleGothic, arial, Helvetica, sans-serif; font-size: 12pt;">
+                          <span style="line-height: 1.8; font-family: &quot;맑은 고딕&quot;; font-size: 10pt;"><span
+                              style="font-family: &quot;맑은 고딕&quot;; font-size: 10pt;">&nbsp;</span></span><span
+                            style="letter-spacing: 0pt; text-align: center; text-indent: 0pt; font-family: &quot;맑은 고딕&quot;; font-size: 10pt;"><span
+                              style="font-family: &quot;맑은 고딕&quot;; font-size: 10pt;">한국건설생활환경시험연구원 선임연구원</span></span>
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        style="padding: 0px; word-break: break-all; border: 1px solid rgb(0, 0, 0); width: 123px; height: 25px; background-color: rgb(194, 194, 194);">
+                        <p
+                          style="margin: 0px; padding: 0px; line-height: 1.8; text-align: center; font-family: 돋움, dotum, AppleGothic, arial, Helvetica, sans-serif; font-size: 12pt;">
+                          <strong style="font-size: 10pt;">전 문 분 야</strong></p>
+                      </td>
+                      <td
+                        style="padding: 0px; word-break: break-all; border: 1px solid rgb(0, 0, 0); width: 387px; height: 25px;">
+                        <p
+                          style="margin: 0pt; padding: 0px; line-height: 1.8; text-indent: 0pt; vertical-align: baseline; letter-spacing: 0pt; word-break: keep-all; font-family: 돋움, dotum, AppleGothic, arial, Helvetica, sans-serif; font-size: 12pt;">
+                          <span style="font-family: &quot;맑은 고딕&quot;; font-size: 10pt;"><span
+                              style="font-family: &quot;맑은 고딕&quot;; font-size: 10pt;">&nbsp;건축공학</span></span></p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"
+                        style="padding: 0px; word-break: break-all; border: 1px solid rgb(0, 0, 0); width: 247px; height: 25px; background-color: rgb(194, 194, 194);">
+                        <p
+                          style="margin: 0px; padding: 0px; line-height: 1.8; text-align: center; font-family: 돋움, dotum, AppleGothic, arial, Helvetica, sans-serif; font-size: 12pt;">
+                          <strong style="font-size: 10pt;">&nbsp;자문 일자</strong></p>
+                      </td>
+                      <td
+                        style="padding: 0px; word-break: break-all; border: 1px solid rgb(0, 0, 0); width: 387px; height: 25px;">
+                        <p
+                          style="margin: 0pt; padding: 0px; font-family: 한양신명조; line-height: 1.8; text-indent: 0pt; vertical-align: baseline; letter-spacing: 0pt; word-break: keep-all; font-size: 12pt;">
+                          <span
+                            style="font-family: &quot;맑은 고딕&quot;; line-height: 1.8; letter-spacing: 0pt; font-size: 10pt;">&nbsp;2020</span><span
+                            style="font-family: &quot;맑은 고딕&quot;; line-height: 1.8; font-size: 10pt;">년 8</span><span
+                            style="font-family: &quot;맑은 고딕&quot;; line-height: 1.8; font-size: 10pt;">월 19</span><span
+                            style="font-family: &quot;맑은 고딕&quot;; line-height: 1.8; font-size: 10pt;">일&nbsp;</span><span
+                            style="font-family: &quot;맑은 고딕&quot;; line-height: 1.8; letter-spacing: 0pt; font-size: 10pt;">(</span><span
+                            style="font-family: &quot;맑은 고딕&quot;; line-height: 1.8; font-size: 10pt;">수</span><span
+                            style="font-family: &quot;맑은 고딕&quot;; line-height: 1.8; letter-spacing: 0pt; font-size: 10pt;">)
+                            14</span><span
+                            style="font-family: &quot;맑은 고딕&quot;; line-height: 1.8; font-size: 10pt;">시</span><span
+                            style="font-family: &quot;맑은 고딕&quot;; line-height: 1.8; letter-spacing: 0pt; font-size: 10pt;">~16</span><span
+                            style="font-family: &quot;맑은 고딕&quot;; line-height: 1.8; font-size: 10pt;">시</span></p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"
+                        style="padding: 0px; word-break: break-all; border: 1px solid rgb(0, 0, 0); width: 247px; height: 25px; background-color: rgb(194, 194, 194);">
+                        <p
+                          style="margin: 0px; padding: 0px; line-height: 1.8; text-align: center; font-family: 돋움, dotum, AppleGothic, arial, Helvetica, sans-serif; font-size: 12pt;">
+                          <strong style="font-size: 10pt;">연구비 비목</strong></p>
+                      </td>
+                      <td
+                        style="padding: 0px; word-break: break-all; border: 1px solid rgb(0, 0, 0); width: 387px; height: 25px;">
+                        <p
+                          style="margin: 0pt; padding: 0px; font-family: 한양신명조; line-height: 1.8; text-indent: 0pt; vertical-align: baseline; letter-spacing: 0pt; word-break: keep-all; font-size: 12pt;">
+                          <span
+                            style="font-family: &quot;맑은 고딕&quot;; line-height: 1.8; font-size: 10pt;">&nbsp;연구활동비</span><span
+                            style="font-family: &quot;맑은 고딕&quot;; line-height: 1.8; letter-spacing: 0pt; font-size: 10pt;">-</span><span
+                            style="font-family: &quot;맑은 고딕&quot;; line-height: 1.8; font-size: 10pt;">전문가활용비</span><span
+                            style="font-family: &quot;맑은 고딕&quot;; line-height: 1.8; letter-spacing: 0pt; font-size: 10pt;">-</span><span
+                            style="font-family: &quot;맑은 고딕&quot;; line-height: 1.8; font-size: 10pt;">자문비</span></p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"
+                        style="padding: 0px; word-break: break-all; border: 1px solid rgb(0, 0, 0); width: 247px; height: 25px; background-color: rgb(194, 194, 194);">
+                        <p
+                          style="margin: 0px; padding: 0px; line-height: 1.8; text-align: center; font-family: 돋움, dotum, AppleGothic, arial, Helvetica, sans-serif; font-size: 12pt;">
+                          <strong style="font-size: 10pt;">지급 내역</strong></p>
+                      </td>
+                      <td
+                        style="padding: 0px; word-break: break-all; border: 1px solid rgb(0, 0, 0); width: 387px; height: 25px;">
+                        <p
+                          style="margin: 0pt; padding: 0px; font-family: 한양신명조; line-height: 1.8; text-indent: 0pt; vertical-align: baseline; letter-spacing: 0pt; word-break: keep-all; font-size: 12pt;">
+                          <span style="font-family: &quot;맑은 고딕&quot;; line-height: 1.8; font-size: 10pt;">&nbsp;자문
+                            활동</span></p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"
+                        style="padding: 0px; word-break: break-all; border: 1px solid rgb(0, 0, 0); width: 247px; height: 25px; background-color: rgb(194, 194, 194);">
+                        <p
+                          style="margin: 0px; padding: 0px; line-height: 1.8; text-align: center; font-family: 돋움, dotum, AppleGothic, arial, Helvetica, sans-serif; font-size: 12pt;">
+                          <strong style="font-size: 10pt;">지급 금액</strong></p>
+                      </td>
+                      <td
+                        style="padding: 0px; word-break: break-all; border: 1px solid rgb(0, 0, 0); width: 387px; height: 25px;">
+                        <p
+                          style="margin: 0pt; padding: 0px; font-family: 한양신명조; line-height: 1.8; text-indent: 0pt; vertical-align: baseline; letter-spacing: 0pt; word-break: keep-all; font-size: 12pt;">
+                          <span
+                            style="font-family: &quot;맑은 고딕&quot;; line-height: 1.8; letter-spacing: 0pt; font-size: 10pt;">&nbsp;금
+                            200,000</span><span
+                            style="font-family: &quot;맑은 고딕&quot;; line-height: 1.8; font-size: 10pt;">원&nbsp;</span><span
+                            style="font-family: &quot;맑은 고딕&quot;; line-height: 1.8; letter-spacing: 0pt; font-size: 10pt;">(이</span><span
+                            style="font-family: &quot;맑은 고딕&quot;; line-height: 1.8; font-size: 10pt;">십만원</span><span
+                            style="font-family: &quot;맑은 고딕&quot;; line-height: 1.8; letter-spacing: 0pt; font-size: 10pt;">)</span>
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"
+                        style="padding: 0px; word-break: break-all; border: 1px solid rgb(0, 0, 0); width: 247px; height: 25px; background-color: rgb(194, 194, 194);">
+                        <p
+                          style="margin: 0px; padding: 0px; line-height: 1.8; text-align: center; font-family: 돋움, dotum, AppleGothic, arial, Helvetica, sans-serif; font-size: 12pt;">
+                          <span style="font-family: dotum; line-height: 1.8; font-size: 10pt;"><b
+                              style="font-size: 10pt;">* 참 고</b></span></p>
+                      </td>
+                      <td
+                        style="padding: 0px; word-break: break-all; border: 1px solid rgb(0, 0, 0); width: 387px; height: 25px;">
+                        <p
+                          style="margin: 0px; padding: 0px; line-height: 1.8; font-family: 돋움, dotum, AppleGothic, arial, Helvetica, sans-serif; font-size: 12pt;">
+                          <span style="font-family: &quot;맑은 고딕&quot;; line-height: 1.8; font-size: 10pt;">&nbsp;기타
+                            소득</span></p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"
+                        style="padding: 0px; word-break: break-all; border: 1px solid rgb(0, 0, 0); width: 247px; height: 25px; background-color: rgb(194, 194, 194);">
+                        <p
+                          style="margin: 0px; padding: 0px; line-height: 1.8; text-align: center; font-family: 돋움, dotum, AppleGothic, arial, Helvetica, sans-serif; font-size: 12pt;">
+                          <strong style="font-size: 10pt;">지급 계좌</strong></p>
+                      </td>
+                      <td
+                        style="padding: 0px; word-break: break-all; border: 1px solid rgb(0, 0, 0); width: 387px; height: 25px;">
+                        <p
+                          style="margin: 0pt; padding: 0px; font-family: 한양신명조; line-height: 1.8; text-indent: 0pt; vertical-align: baseline; letter-spacing: 0pt; word-break: keep-all; font-size: 12pt;">
+                          <span style="font-family: &quot;맑은 고딕&quot;; line-height: 1.8; font-size: 10pt;">&nbsp;IBK기업은행
+                            497-026758-01-015 이강영</span></p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p
+                  style="margin: 0px; padding: 0px; font-size: 10pt; line-height: 1.8; font-variant-numeric: normal; font-variant-east-asian: normal; background-color: rgb(255, 255, 255); font-family: &quot;맑은 고딕&quot;;">
+                  &nbsp;</p>
+                <p
+                  style="margin: 0px; padding: 0px; font-size: 10pt; line-height: 1.8; font-variant-numeric: normal; font-variant-east-asian: normal; background-color: rgb(255, 255, 255); font-family: &quot;맑은 고딕&quot;;">
+                  <strong style="font-size: 10pt;">5. 지급 방식 :&nbsp;<span
+                      style="line-height: 1.8; margin-top: 0px; margin-bottom: 0px; font-size: 10pt; font-family: &quot;맑은 고딕&quot;;">'</span></strong><b
+                    style="font-size: 10pt;"><span
+                      style="line-height: 1.8; text-align: justify; font-size: 10pt; font-family: &quot;맑은 고딕&quot;;">국내&nbsp;기후&nbsp;맞춤형&nbsp;상변화물질(PCM)&nbsp;응용&nbsp;건물외피&nbsp;기술&nbsp;개발</span><span
+                      style="line-height: 1.8; font-size: 10pt; font-family: &quot;맑은 고딕&quot;;">&nbsp;(2020)</span></b><strong
+                    style="font-size: 10pt;"><span
+                      style="line-height: 1.8; margin-top: 0px; margin-bottom: 0px; font-size: 10pt; font-family: &quot;맑은 고딕&quot;;">'&nbsp;</span><span
+                      style="line-height: 1.8; margin-top: 0px; margin-bottom: 0px; font-size: 10pt; font-family: &quot;맑은 고딕&quot;;">연구비
+                      계좌에서 집행&nbsp;</span></strong></p>
+                <p
+                  style="margin: 0px; padding: 0px; font-size: 10pt; line-height: 1.8; font-variant-numeric: normal; font-variant-east-asian: normal; background-color: rgb(255, 255, 255); font-family: &quot;맑은 고딕&quot;;">
+                  &nbsp;</p>
+                <p
+                  style="margin: 0px; padding: 0px; font-size: 10pt; line-height: 1.8; font-variant-numeric: normal; font-variant-east-asian: normal; background-color: rgb(255, 255, 255); font-family: &quot;맑은 고딕&quot;;">
+                  [첨부]</p>
+                <p
+                  style="margin: 0px; padding: 0px; font-size: 10pt; line-height: 1.8; font-variant-numeric: normal; font-variant-east-asian: normal; background-color: rgb(255, 255, 255); font-family: &quot;맑은 고딕&quot;;">
+                  1.&nbsp;<span
+                    style="font-family: dotum; line-height: 1.8; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;"><span
+                      style="font-family: &quot;Noto Sans KR&quot;, &quot;맑은 고딕&quot;, 돋움, &quot;malgun gothic&quot;, dotum, AppleGothic, Helvetica, sans-serif; line-height: 1.8; color: rgb(51, 51, 51); letter-spacing: -0.5px; font-size: 10pt;">[첨부1]
+                      인적사항&nbsp;</span></span><span
+                    style="font-family: &quot;Noto Sans KR&quot;, &quot;맑은 고딕&quot;, 돋움, &quot;malgun gothic&quot;, dotum, AppleGothic, Helvetica, sans-serif; line-height: 1.8; color: rgb(51, 51, 51); letter-spacing: -0.5px; font-size: 10pt;">_이강영</span><span
+                    style="line-height: 1.8; font-size: 10pt; font-family: &quot;맑은 고딕&quot;;">&nbsp;1부.</span></p>
+                <p
+                  style="margin: 0px; padding: 0px; font-size: 10pt; line-height: 1.8; font-variant-numeric: normal; font-variant-east-asian: normal; background-color: rgb(255, 255, 255); font-family: &quot;맑은 고딕&quot;;">
+                  <span
+                    style="font-family: dotum; line-height: 1.8; margin-top: 0px; margin-bottom: 0px; font-size: 10pt;"><span
+                      style="font-family: &quot;Noto Sans KR&quot;, &quot;맑은 고딕&quot;, 돋움, &quot;malgun gothic&quot;, dotum, AppleGothic, Helvetica, sans-serif; line-height: 1.8; color: rgb(51, 51, 51); letter-spacing: -0.5px; font-size: 10pt;">2.&nbsp;
+                      [첨부2]&nbsp;</span></span><span
+                    style="font-family: &quot;Noto Sans KR&quot;, &quot;맑은 고딕&quot;, 돋움, &quot;malgun gothic&quot;, dotum, AppleGothic, Helvetica, sans-serif; line-height: 1.8; color: rgb(51, 51, 51); letter-spacing: -0.5px; font-size: 10pt;">통장
+                    및</span><span
+                    style="font-family: &quot;Noto Sans KR&quot;, &quot;맑은 고딕&quot;, 돋움, &quot;malgun gothic&quot;, dotum, AppleGothic, Helvetica, sans-serif; line-height: 1.8; color: rgb(51, 51, 51); letter-spacing: -0.5px; font-size: 10pt;">&nbsp;</span><span
+                    style="line-height: 1.8; margin-top: 0px; margin-bottom: 0px; font-size: 10pt; font-family: &quot;맑은 고딕&quot;;"><span
+                      style="font-family: &quot;Noto Sans KR&quot;, &quot;맑은 고딕&quot;, 돋움, &quot;malgun gothic&quot;, dotum, AppleGothic, Helvetica, sans-serif; line-height: 1.8; color: rgb(51, 51, 51); letter-spacing: -0.5px; font-size: 10pt;">신분증사본_이강영</span>&nbsp;1부.</span><span
+                    style="line-height: 1.8; font-size: 10pt; font-family: &quot;맑은 고딕&quot;;">&nbsp;</span></p>
+                <p
+                  style="margin: 0px; padding: 0px; font-size: 10pt; line-height: 1.8; font-variant-numeric: normal; font-variant-east-asian: normal; background-color: rgb(255, 255, 255); font-family: &quot;맑은 고딕&quot;;">
+                  <span style="font-family: dotum; line-height: 1.8; font-size: 10pt;"><br /></span></p>
+                <p
+                  style="margin: 0px; padding: 0px; font-size: 10pt; line-height: 1.8; font-variant-numeric: normal; font-variant-east-asian: normal; background-color: rgb(255, 255, 255); font-family: &quot;맑은 고딕&quot;;">
+                  <span style="line-height: 1.8; font-size: 10pt; font-family: &quot;맑은 고딕&quot;;">끝.</span></p>
+              </span><br /></td>
+          </tr>
+        </tbody>
+      </table> <br />
+    </div>
+    <div style="line-height: normal; font-family: 돋움; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;"> <span
+        style="line-height: normal; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;">
+        <!-- Draft --> </span> <span
+        style="line-height: normal; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;">
+      </span> <span
+        style="line-height: normal; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;">
+      </span> <span
+        style="line-height: normal; font-family: &quot;malgun gothic&quot;, dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;">
+        &nbsp;&nbsp;&nbsp;&nbsp;</span> </div>
+    <div style="line-height: normal; font-family: 돋움; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;"> &nbsp;
+    </div>
+  </span> </body>
+
+</html>
