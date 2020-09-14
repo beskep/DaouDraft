@@ -4,8 +4,8 @@
       -
       -
       -
-      - 김영진
-- example:
+      - 김영진  # 결재자가 4명인 경우 마지막 (대표이사) 이름 변경
+- example_blank:
     docNo: 문서 번호
     draftDate: 2015-10-21(수)
     draftDept: 부서
@@ -25,6 +25,13 @@
       - 2016/10/21
       - 2017/10/21
       - 2018/10/21
+- example_five:
+    signName:
+      # 원본 문서는 5명이나 4명 정보를 입력했기 때문에 경고 발생
+      - 작성자
+      - 결재자1
+      - 결재자2
+      - 결재자3
 - 친환경:
     draftUser: 이용하
     signName:
@@ -32,4 +39,4 @@
       -
       -
       - 김영진
-    wrongOption: null
+    wrongOption: null  # 잘못된 설정 (경고 발생)
